@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Task schemaVersion="5.4">
+    <Registration>
+        <Name>Distribution Analysis</Name>
+        <Description>Distribution analysis provides information about the distribution of numeric variables. A variety of plots such as histograms, probability plots, and quantile-quantile plots can be used in this analysis.</Description>
+        <GUID>6be3bb17-5a6e-44ed-867f-3101d8ec27a6</GUID>
+        <Procedures>SORT UNIVARIATE</Procedures>
+        <Version>3.8</Version>
+        <Links>
+            <Link href="http://documentation.sas.com/?softwareId=STUDIOMID&amp;softwareVersion=3.8&amp;softwareContextId=tasks&amp;requestor=inapp">SAS Studio Task Reference Guide</Link>
+            <Link href=""/>
+            <Link href=""/>
+            <Link href="http://documentation.sas.com/?softwareId=MVADOC&amp;softwareVersion=3.8_9.4&amp;softwareContextId=proc_univariate&amp;requestor=inapp">The UNIVARIATE Procedure</Link>
+            <Link href=""/>
+            <Link href=""/>
+            <Link href="http://support.sas.com/training/studio">SAS Tutorials</Link>
+        </Links>
+    </Registration>
+    <Metadata>
+        <DataSources>
+            <DataSource name="dataset" where="true">
+                <Roles>
+                    <Role
+                        exclude="classVariables,freqVariable,byVariables"
+                        maxVars="0" minVars="1" name="analysisVariables"
+                        order="true" type="N">Analysis variables:</Role>
+                    <Role
+                        exclude="analysisVariables,freqVariable,byVariables"
+                        indent="1" maxVars="2" minVars="0"
+                        name="classVariables" order="true" type="A">Classification variables:</Role>
+                    <Role
+                        exclude="analysisVariables,classVariables,byVariables"
+                        maxVars="1" minVars="0" name="freqVariable" type="N">Frequency count:</Role>
+                    <Role
+                        exclude="analysisVariables,classVariables,freqVariable"
+                        maxVars="0" minVars="0" name="byVariables"
+                        order="true" type="A">Group analysis by:</Role>
+                </Roles>
+            </DataSource>
+        </DataSources>
+        <Options>
+            <Option inputType="string" name="dataTab">DATA</Option>
+            <Option inputType="string" name="optionsTab">OPTIONS</Option>
+            <Option inputType="string" name="dataGroup">DATA</Option>
+            <Option inputType="string" name="rolesGroup">ROLES</Option>
+            <Option inputType="string" name="otherRolesGroup">ADDITIONAL ROLES</Option>
+            <Option inputType="string" name="optionsGroup">TABLES</Option>
+            <Option inputType="string" name="normalityGroup">CHECKING FOR NORMALITY</Option>
+            <Option inputType="checkbox" name="normalHistogram">Histogram and goodness-of-fit tests</Option>
+            <Option inputType="checkbox" name="normalityTests">Goodness-of-fit tests</Option>
+            <Option inputType="checkbox" name="normalityProbPlot">Normal probability plot</Option>
+            <Option indent="1" inputType="checkbox" name="normalityProbPlotReferenceLine">Add a reference line</Option>
+            <Option inputType="checkbox" name="normalityQqPlot">Normal quantile-quantile plot</Option>
+            <Option indent="1" inputType="checkbox" name="normalityQqPlotReferenceLine">Add a reference line</Option>
+            <Option inputType="string" name="normalityInsetGroup">Inset Statistics</Option>
+            <Option indent="1" inputType="checkbox" name="normalityHistogramInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="normalityProbPlotInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="normalityQQPlotInset">Add inset statistics</Option>
+            <Option inputType="checkbox" name="normalityInsetMean">Mean</Option>
+            <Option inputType="checkbox" name="normalityInsetMedian">Median</Option>
+            <Option inputType="checkbox" name="normalityInsetStd">Standard deviation</Option>
+            <Option inputType="checkbox" name="normalityInsetVariance">Variance</Option>
+            <Option inputType="checkbox" name="normalityInsetSkewness">Skewness</Option>
+            <Option inputType="checkbox" name="normalityInsetKurtosis">Kurtosis</Option>
+            <Option defaultValue="1" inputType="checkbox" name="normalityInsetNobs">Number of observations</Option>
+            <Option defaultValue="0" inputType="checkbox" name="normalityInsetGoodnessOfFit">Goodness-of-fit test</Option>
+            <Option inputType="string" name="plotsGroup">PLOTS</Option>
+            <Option inputType="string" name="histogramGroup">EXPLORING DATA</Option>
+            <Option defaultValue="1" inputType="checkbox" name="histogram">Histogram</Option>
+            <Option indent="1" inputType="checkbox" name="addHistogramKernel">Add kernel density estimate</Option>
+            <Option indent="1" inputType="checkbox" name="addHistogramNormal">Add normal curve</Option>
+            <Option inputType="string" name="histogramInsetGroup">Inset Statistics</Option>
+            <Option indent="1" inputType="checkbox" name="histogramInset">Add inset statistics</Option>
+            <Option inputType="checkbox" name="histogramInsetMean">Mean</Option>
+            <Option inputType="checkbox" name="histogramInsetMedian">Median</Option>
+            <Option inputType="checkbox" name="histogramInsetStd">Standard deviation</Option>
+            <Option inputType="checkbox" name="histogramInsetVariance">Variance</Option>
+            <Option inputType="checkbox" name="histogramInsetSkewness">Skewness</Option>
+            <Option inputType="checkbox" name="histogramInsetKurtosis">Kurtosis</Option>
+            <Option defaultValue="1" inputType="checkbox" name="histogramInsetNobs">Number of observations</Option>
+            <Option defaultValue="1" inputType="checkbox" name="histogramInsetNoframe">Draw box around statistics</Option>
+            <Option inputType="string" name="fitDifferentDistsGroup">FITTING DISTRIBUTIONS</Option>
+            <Option inputType="string" name="betaGroup">Beta</Option>
+            <Option inputType="checkbox" name="betaHistogram">Histogram and goodness-of-fit tests</Option>
+            <Option inputType="checkbox" name="betaProbPlot">Probability plot</Option>
+            <Option inputType="checkbox" name="betaQQPlot">Quantile-quantile plot</Option>
+            <Option inputType="string" name="betaInsetGroup">Inset Statistics</Option>
+            <Option indent="1" inputType="checkbox" name="betaHistogramInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="betaProbPlotInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="betaQQPlotInset">Add inset statistics</Option>
+            <Option inputType="checkbox" name="betaInsetMean">Mean</Option>
+            <Option inputType="checkbox" name="betaInsetMedian">Median</Option>
+            <Option inputType="checkbox" name="betaInsetStd">Standard deviation</Option>
+            <Option inputType="checkbox" name="betaInsetVariance">Variance</Option>
+            <Option inputType="checkbox" name="betaInsetSkewness">Skewness</Option>
+            <Option inputType="checkbox" name="betaInsetKurtosis">Kurtosis</Option>
+            <Option defaultValue="1" inputType="checkbox" name="betaInsetNobs">Number of observations</Option>
+            <Option inputType="string" name="expGroup">Exponential</Option>
+            <Option inputType="checkbox" name="expHistogram">Histogram and goodness-of-fit tests</Option>
+            <Option inputType="checkbox" name="expProbPlot">Probability plot</Option>
+            <Option inputType="checkbox" name="expQQPlot">Quantile-quantile plot</Option>
+            <Option inputType="string" name="expInsetGroup">Inset Statistics</Option>
+            <Option indent="1" inputType="checkbox" name="expHistogramInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="expProbPlotInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="expQQPlotInset">Add inset statistics</Option>
+            <Option inputType="checkbox" name="expInsetMean">Mean</Option>
+            <Option inputType="checkbox" name="expInsetMedian">Median</Option>
+            <Option inputType="checkbox" name="expInsetStd">Standard deviation</Option>
+            <Option inputType="checkbox" name="expInsetVariance">Variance</Option>
+            <Option inputType="checkbox" name="expInsetSkewness">Skewness</Option>
+            <Option inputType="checkbox" name="expInsetKurtosis">Kurtosis</Option>
+            <Option defaultValue="1" inputType="checkbox" name="expInsetNobs">Number of observations</Option>
+            <Option inputType="string" name="gammaGroup">Gamma</Option>
+            <Option inputType="checkbox" name="gammaHistogram">Histogram and goodness-of-fit tests</Option>
+            <Option inputType="checkbox" name="gammaProbPlot">Probability plot</Option>
+            <Option inputType="checkbox" name="gammaQQPlot">Quantile-quantile plot</Option>
+            <Option inputType="string" name="gammaInsetGroup">Inset Statistics</Option>
+            <Option indent="1" inputType="checkbox" name="gammaHistogramInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="gammaProbPlotInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="gammaQQPlotInset">Add inset statistics</Option>
+            <Option inputType="checkbox" name="gammaInsetMean">Mean</Option>
+            <Option inputType="checkbox" name="gammaInsetMedian">Median</Option>
+            <Option inputType="checkbox" name="gammaInsetStd">Standard deviation</Option>
+            <Option inputType="checkbox" name="gammaInsetVariance">Variance</Option>
+            <Option inputType="checkbox" name="gammaInsetSkewness">Skewness</Option>
+            <Option inputType="checkbox" name="gammaInsetKurtosis">Kurtosis</Option>
+            <Option defaultValue="1" inputType="checkbox" name="gammaInsetNobs">Number of observations</Option>
+            <Option inputType="string" name="lognormalGroup">Lognormal</Option>
+            <Option inputType="checkbox" name="lognormalHistogram">Histogram and goodness-of-fit tests</Option>
+            <Option inputType="checkbox" name="lognormalProbPlot">Probability plot</Option>
+            <Option inputType="checkbox" name="lognormalQQPlot">Quantile-quantile plot</Option>
+            <Option inputType="string" name="lognormalInsetGroup">Inset Statistics</Option>
+            <Option indent="1" inputType="checkbox" name="lognormalHistogramInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="lognormalProbPlotInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="lognormalQQPlotInset">Add inset statistics</Option>
+            <Option inputType="checkbox" name="lognormalInsetMean">Mean</Option>
+            <Option inputType="checkbox" name="lognormalInsetMedian">Median</Option>
+            <Option inputType="checkbox" name="lognormalInsetStd">Standard deviation</Option>
+            <Option inputType="checkbox" name="lognormalInsetVariance">Variance</Option>
+            <Option inputType="checkbox" name="lognormalInsetSkewness">Skewness</Option>
+            <Option inputType="checkbox" name="lognormalInsetKurtosis">Kurtosis</Option>
+            <Option defaultValue="1" inputType="checkbox" name="lognormalInsetNobs">Number of observations</Option>
+            <Option inputType="string" name="weibullGroup">Weibull</Option>
+            <Option inputType="checkbox" name="weibullHistogram">Histogram and goodness-of-fit tests</Option>
+            <Option inputType="checkbox" name="weibullProbPlot">Probability plot</Option>
+            <Option inputType="checkbox" name="weibullQQPlot">Quantile-quantile plot</Option>
+            <Option inputType="string" name="weibullInsetGroup">Inset Statistics</Option>
+            <Option indent="1" inputType="checkbox" name="weibullHistogramInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="weibullProbPlotInset">Add inset statistics</Option>
+            <Option indent="1" inputType="checkbox" name="weibullQQPlotInset">Add inset statistics</Option>
+            <Option inputType="checkbox" name="weibullInsetMean">Mean</Option>
+            <Option inputType="checkbox" name="weibullInsetMedian">Median</Option>
+            <Option inputType="checkbox" name="weibullInsetStd">Standard deviation</Option>
+            <Option inputType="checkbox" name="weibullInsetVariance">Variance</Option>
+            <Option inputType="checkbox" name="weibullInsetSkewness">Skewness</Option>
+            <Option inputType="checkbox" name="weibullInsetKurtosis">Kurtosis</Option>
+            <Option defaultValue="1" inputType="checkbox" name="weibullInsetNobs">Number of observations</Option>
+            <Option inputType="checkbox" name="normalProbPlot">Normal probability plot</Option>
+            <Option inputType="checkbox" name="probPlotReferenceLine">Add a reference line</Option>
+            <!-- Code comments -->
+            <Option inputType="string" name="commentExplore">Exploring Data</Option>
+            <Option inputType="string" name="commentNormality">Checking for Normality</Option>
+            <Option inputType="string" name="commentFitting">Fitting Distributions</Option>
+        </Options>
+    </Metadata>
+    <UI>
+        <Container option="dataTab">
+            <Group open="true" option="dataGroup">
+                <DataItem data="dataset"/>
+            </Group>
+            <Group open="true" option="rolesGroup">
+                <RoleItem role="analysisVariables"/>
+            </Group>
+            <Group option="otherRolesGroup">
+                <RoleItem role="freqVariable"/>
+                <RoleItem role="byVariables"/>
+            </Group>
+        </Container>
+        <Container option="optionsTab">
+            <Group open="true" option="histogramGroup">
+                <OptionItem option="histogram"/>
+                <RoleItem role="classVariables"/>
+                <OptionItem option="addHistogramNormal"/>
+                <OptionItem option="addHistogramKernel"/>
+                <OptionItem option="histogramInset"/>
+                <Group option="histogramInsetGroup">
+                    <OptionItem option="histogramInsetNobs"/>
+                    <OptionItem option="histogramInsetMean"/>
+                    <OptionItem option="histogramInsetMedian"/>
+                    <OptionItem option="histogramInsetStd"/>
+                    <OptionItem option="histogramInsetVariance"/>
+                    <OptionItem option="histogramInsetSkewness"/>
+                    <OptionItem option="histogramInsetKurtosis"/>
+                </Group>
+            </Group>
+            <Group open="true" option="normalityGroup">
+                <!--                <OptionItem option="normalityTests"/>
+-->
+                <OptionItem option="normalHistogram"/>
+                <OptionItem option="normalityHistogramInset"/>
+                <OptionItem option="normalityProbPlot"/>
+                <OptionItem option="normalityProbPlotInset"/>
+                <OptionItem option="normalityQqPlot"/>
+                <OptionItem option="normalityQQPlotInset"/>
+                <Group option="normalityInsetGroup">
+                    <OptionItem option="normalityInsetNobs"/>
+                    <OptionItem option="normalityInsetGoodnessOfFit"/>
+                    <OptionItem option="normalityInsetMean"/>
+                    <OptionItem option="normalityInsetMedian"/>
+                    <OptionItem option="normalityInsetStd"/>
+                    <OptionItem option="normalityInsetVariance"/>
+                    <OptionItem option="normalityInsetSkewness"/>
+                    <OptionItem option="normalityInsetKurtosis"/>
+                </Group>
+            </Group>
+            <Group option="fitDifferentDistsGroup">
+                <Group option="betaGroup">
+                    <OptionItem option="betaHistogram"/>
+                    <OptionItem option="betaHistogramInset"/>
+                    <OptionItem option="betaProbPlot"/>
+                    <OptionItem option="betaProbPlotInset"/>
+                    <OptionItem option="betaQQPlot"/>
+                    <OptionItem option="betaQQPlotInset"/>
+                    <Group option="betaInsetGroup">
+                        <OptionItem option="betaInsetNobs"/>
+                        <OptionItem option="betaInsetMean"/>
+                        <OptionItem option="betaInsetMedian"/>
+                        <OptionItem option="betaInsetStd"/>
+                        <OptionItem option="betaInsetVariance"/>
+                    </Group>
+                </Group>
+                <Group option="expGroup">
+                    <OptionItem option="expHistogram"/>
+                    <OptionItem option="expHistogramInset"/>
+                    <OptionItem option="expProbPlot"/>
+                    <OptionItem option="expProbPlotInset"/>
+                    <OptionItem option="expQQPlot"/>
+                    <OptionItem option="expQQPlotInset"/>
+                    <Group option="expInsetGroup">
+                        <OptionItem option="expInsetNobs"/>
+                        <OptionItem option="expInsetMean"/>
+                        <OptionItem option="expInsetMedian"/>
+                        <OptionItem option="expInsetStd"/>
+                        <OptionItem option="expInsetVariance"/>
+                    </Group>
+                </Group>
+                <Group option="gammaGroup">
+                    <OptionItem option="gammaHistogram"/>
+                    <OptionItem option="gammaHistogramInset"/>
+                    <OptionItem option="gammaProbPlot"/>
+                    <OptionItem option="gammaProbPlotInset"/>
+                    <OptionItem option="gammaQQPlot"/>
+                    <OptionItem option="gammaQQPlotInset"/>
+                    <Group option="gammaInsetGroup">
+                        <OptionItem option="gammaInsetNobs"/>
+                        <OptionItem option="gammaInsetMean"/>
+                        <OptionItem option="gammaInsetMedian"/>
+                        <OptionItem option="gammaInsetStd"/>
+                        <OptionItem option="gammaInsetVariance"/>
+                    </Group>
+                </Group>
+                <Group option="lognormalGroup">
+                    <OptionItem option="lognormalHistogram"/>
+                    <OptionItem option="lognormalHistogramInset"/>
+                    <OptionItem option="lognormalProbPlot"/>
+                    <OptionItem option="lognormalProbPlotInset"/>
+                    <OptionItem option="lognormalQQPlot"/>
+                    <OptionItem option="lognormalQQPlotInset"/>
+                    <Group option="lognormalInsetGroup">
+                        <OptionItem option="lognormalInsetNobs"/>
+                        <OptionItem option="lognormalInsetMean"/>
+                        <OptionItem option="lognormalInsetMedian"/>
+                        <OptionItem option="lognormalInsetStd"/>
+                        <OptionItem option="lognormalInsetVariance"/>
+                    </Group>
+                </Group>
+                <Group option="weibullGroup">
+                    <OptionItem option="weibullHistogram"/>
+                    <OptionItem option="weibullHistogramInset"/>
+                    <OptionItem option="weibullProbPlot"/>
+                    <OptionItem option="weibullProbPlotInset"/>
+                    <OptionItem option="weibullQQPlot"/>
+                    <OptionItem option="weibullQQPlotInset"/>
+                    <Group option="weibullInsetGroup">
+                        <OptionItem option="weibullInsetNobs"/>
+                        <OptionItem option="weibullInsetMean"/>
+                        <OptionItem option="weibullInsetMedian"/>
+                        <OptionItem option="weibullInsetStd"/>
+                        <OptionItem option="weibullInsetVariance"/>
+                    </Group>
+                </Group>
+            </Group>
+        </Container>
+    </UI>
+    <Dependencies>
+        <Dependency condition="($histogram == '1')">
+            <Target action="show" conditionResult="true" option="classVariables"/>
+            <Target action="hide" conditionResult="false" option="classVariables"/>
+            <Target action="show" conditionResult="true" option="addHistogramNormal"/>
+            <Target action="hide" conditionResult="false" option="addHistogramNormal"/>
+            <Target action="show" conditionResult="true" option="addHistogramKernel"/>
+            <Target action="hide" conditionResult="false" option="addHistogramKernel"/>
+            <Target action="show" conditionResult="true" option="histogramInset"/>
+            <Target action="hide" conditionResult="false" option="histogramInset"/>
+        </Dependency>
+        <Dependency condition="($histogram == 1 &amp;&amp; $histogramInset == 1)">
+            <Target action="show" conditionResult="true" option="histogramInsetGroup"/>
+            <Target action="hide" conditionResult="false" option="histogramInsetGroup"/>
+        </Dependency>
+        <Dependency condition="($normalHistogram == 1)">
+            <Target action="show" conditionResult="true" option="normalityHistogramInset"/>
+            <Target action="hide" conditionResult="false" option="normalityHistogramInset"/>
+        </Dependency>
+        <Dependency condition="($normalityProbPlot == 1)">
+            <Target action="show" conditionResult="true" option="normalityProbPlotInset"/>
+            <Target action="hide" conditionResult="false" option="normalityProbPlotInset"/>
+        </Dependency>
+        <Dependency condition="($normalityQqPlot == 1)">
+            <Target action="show" conditionResult="true" option="normalityQQPlotInset"/>
+            <Target action="hide" conditionResult="false" option="normalityQQPlotInset"/>
+        </Dependency>
+        <Dependency condition="($normalHistogram == 1 &amp;&amp; $normalityHistogramInset == 1) ||              ($normalityProbPlot == 1 &amp;&amp; $normalityProbPlotInset == 1) ||              ($normalityQqPlot == 1 &amp;&amp; $normalityQQPlotInset == 1)">
+            <Target action="show" conditionResult="true" option="normalityInsetGroup"/>
+            <Target action="hide" conditionResult="false" option="normalityInsetGroup"/>
+        </Dependency>
+        <Dependency condition="($betaHistogram == 1)">
+            <Target action="show" conditionResult="true" option="betaHistogramInset"/>
+            <Target action="hide" conditionResult="false" option="betaHistogramInset"/>
+        </Dependency>
+        <Dependency condition="($betaProbPlot == 1)">
+            <Target action="show" conditionResult="true" option="betaProbPlotInset"/>
+            <Target action="hide" conditionResult="false" option="betaProbPlotInset"/>
+        </Dependency>
+        <Dependency condition="($betaQQPlot == 1)">
+            <Target action="show" conditionResult="true" option="betaQQPlotInset"/>
+            <Target action="hide" conditionResult="false" option="betaQQPlotInset"/>
+        </Dependency>
+        <Dependency condition="(              ($betaHistogram == 1 &amp;&amp; $betaHistogramInset == 1) ||             ($betaProbPlot == 1 &amp;&amp; $betaProbPlotInset == 1) ||              ($betaQQPlot == 1 &amp;&amp; $betaQQPlotInset == 1))">
+            <Target action="show" conditionResult="true" option="betaInsetGroup"/>
+            <Target action="hide" conditionResult="false" option="betaInsetGroup"/>
+        </Dependency>
+        <Dependency condition="($expHistogram == 1)">
+            <Target action="show" conditionResult="true" option="expHistogramInset"/>
+            <Target action="hide" conditionResult="false" option="expHistogramInset"/>
+        </Dependency>
+        <Dependency condition="($expProbPlot == 1)">
+            <Target action="show" conditionResult="true" option="expProbPlotInset"/>
+            <Target action="hide" conditionResult="false" option="expProbPlotInset"/>
+        </Dependency>
+        <Dependency condition="($expQQPlot == 1)">
+            <Target action="show" conditionResult="true" option="expQQPlotInset"/>
+            <Target action="hide" conditionResult="false" option="expQQPlotInset"/>
+        </Dependency>
+        <Dependency condition="(              ($expHistogram == 1 &amp;&amp; $expHistogramInset == 1) ||             ($expProbPlot == 1 &amp;&amp; $expProbPlotInset == 1) ||              ($expQQPlot == 1 &amp;&amp; $expQQPlotInset == 1))">
+            <Target action="show" conditionResult="true" option="expInsetGroup"/>
+            <Target action="hide" conditionResult="false" option="expInsetGroup"/>
+        </Dependency>
+        <Dependency condition="($gammaHistogram == 1)">
+            <Target action="show" conditionResult="true" option="gammaHistogramInset"/>
+            <Target action="hide" conditionResult="false" option="gammaHistogramInset"/>
+        </Dependency>
+        <Dependency condition="($gammaProbPlot == 1)">
+            <Target action="show" conditionResult="true" option="gammaProbPlotInset"/>
+            <Target action="hide" conditionResult="false" option="gammaProbPlotInset"/>
+        </Dependency>
+        <Dependency condition="($gammaQQPlot == 1)">
+            <Target action="show" conditionResult="true" option="gammaQQPlotInset"/>
+            <Target action="hide" conditionResult="false" option="gammaQQPlotInset"/>
+        </Dependency>
+        <Dependency condition="(              ($gammaHistogram == 1 &amp;&amp; $gammaHistogramInset == 1) ||             ($gammaProbPlot == 1 &amp;&amp; $gammaProbPlotInset == 1) ||              ($gammaQQPlot == 1 &amp;&amp; $gammaQQPlotInset == 1))">
+            <Target action="show" conditionResult="true" option="gammaInsetGroup"/>
+            <Target action="hide" conditionResult="false" option="gammaInsetGroup"/>
+        </Dependency>
+        <Dependency condition="($lognormalHistogram == 1)">
+            <Target action="show" conditionResult="true" option="lognormalHistogramInset"/>
+            <Target action="hide" conditionResult="false" option="lognormalHistogramInset"/>
+        </Dependency>
+        <Dependency condition="($lognormalProbPlot == 1)">
+            <Target action="show" conditionResult="true" option="lognormalProbPlotInset"/>
+            <Target action="hide" conditionResult="false" option="lognormalProbPlotInset"/>
+        </Dependency>
+        <Dependency condition="($lognormalQQPlot == 1)">
+            <Target action="show" conditionResult="true" option="lognormalQQPlotInset"/>
+            <Target action="hide" conditionResult="false" option="lognormalQQPlotInset"/>
+        </Dependency>
+        <Dependency condition="(              ($lognormalHistogram == 1 &amp;&amp; $lognormalHistogramInset == 1) ||             ($lognormalProbPlot == 1 &amp;&amp; $lognormalProbPlotInset == 1) ||              ($lognormalQQPlot == 1 &amp;&amp; $lognormalQQPlotInset == 1))">
+            <Target action="show" conditionResult="true" option="lognormalInsetGroup"/>
+            <Target action="hide" conditionResult="false" option="lognormalInsetGroup"/>
+        </Dependency>
+        <Dependency condition="($weibullHistogram == 1)">
+            <Target action="show" conditionResult="true" option="weibullHistogramInset"/>
+            <Target action="hide" conditionResult="false" option="weibullHistogramInset"/>
+        </Dependency>
+        <Dependency condition="($weibullProbPlot == 1)">
+            <Target action="show" conditionResult="true" option="weibullProbPlotInset"/>
+            <Target action="hide" conditionResult="false" option="weibullProbPlotInset"/>
+        </Dependency>
+        <Dependency condition="($weibullQQPlot == 1)">
+            <Target action="show" conditionResult="true" option="weibullQQPlotInset"/>
+            <Target action="hide" conditionResult="false" option="weibullQQPlotInset"/>
+        </Dependency>
+        <Dependency condition="(              ($weibullHistogram == 1 &amp;&amp; $weibullHistogramInset == 1) ||             ($weibullProbPlot == 1 &amp;&amp; $weibullProbPlotInset == 1) ||              ($weibullQQPlot == 1 &amp;&amp; $weibullQQPlotInset == 1))">
+            <Target action="show" conditionResult="true" option="weibullInsetGroup"/>
+            <Target action="hide" conditionResult="false" option="weibullInsetGroup"/>
+        </Dependency>
+    </Dependencies>
+    <Requirements>
+        <Requirement condition="(($histogram == 1) ||      ($normalityTests == 1) ||     ($normalHistogram == 1) ||     ($normalityProbPlot == 1) ||     ($normalityQqPlot == 1) ||     ($betaHistogram == 1) ||     ($betaProbPlot == 1) ||     ($betaQQPlot == 1) ||     ($expHistogram == 1) ||     ($expProbPlot == 1) ||     ($expQQPlot == 1) ||     ($gammaHistogram == 1) ||     ($gammaProbPlot == 1) ||     ($gammaQQPlot == 1) ||     ($lognormalHistogram == 1) ||     ($lognormalProbPlot == 1) ||     ($lognormalQQPlot == 1) ||     ($weibullHistogram == 1) ||     ($weibullProbPlot == 1) ||     ($weibullQQPlot == 1)   )">
+            <Message nlsKey="requestSomethingRequirementKey">Select at least one plot or test on the OPTIONS tab.</Message>
+        </Requirement>
+        <Requirement condition="(!($histogramInset == 1) || ($histogramInset == 1 &amp;&amp; ($histogramInsetMean == 1 || $histogramInsetMedian == 1 || $histogramInsetVariance == 1 || $histogramInsetStd == 1 || $histogramInsetSkewness == 1 || $histogramInsetKurtosis == 1 || $histogramInsetNobs == 1 )) )">
+            <Message nlsKey="histogramInsetStatRequirementKey">Select at least one inset statistic to display for the histogram.</Message>
+        </Requirement>
+        <Requirement condition="( !( ( ($normalHistogram == 1 &amp;&amp; $normalityHistogramInset == 1) ||  ($normalityProbPlot == 1 &amp;&amp; $normalityProbPlotInset == 1) ||  ($normalityQqPlot == 1 &amp;&amp; $normalityQQPlotInset == 1)   ) &amp;&amp;  !($normalityInsetMean == 1 || $normalityInsetNobs == 1|| $normalityInsetMedian == 1 || $normalityInsetStd == 1 || $normalityInsetVariance == 1 || $normalityInsetSkewness == 1 || $normalityInsetKurtosis == 1 || $normalityInsetGoodnessOfFit == 1 )) )">
+            <Message nlsKey="normalityInsetStatRequirementKey">Select at least one inset statistic to display for the plots in the Checking for Normality section.</Message>
+        </Requirement>
+        <Requirement condition="( !( ( ($betaHistogram == 1 &amp;&amp; $betaHistogramInset == 1) ||  ($betaProbPlot == 1 &amp;&amp; $betaProbPlotInset == 1) ||  ($betaQQPlot == 1 &amp;&amp; $betaQQPlotInset == 1)   ) &amp;&amp;  !($betaInsetMean == 1 || $betaInsetNobs == 1|| $betaInsetMedian == 1 || $betaInsetStd == 1 || $betaInsetVariance == 1 )) )">
+            <Message nlsKey="betaInsetStatRequirementKey">Select at least one inset statistic to display for the Beta distribution plots in the Fitting Distributions section.</Message>
+        </Requirement>
+        <Requirement condition="( !( ( ($expHistogram == 1 &amp;&amp; $expHistogramInset == 1) ||  ($expProbPlot == 1 &amp;&amp; $expProbPlotInset == 1) ||  ($expQQPlot == 1 &amp;&amp; $expQQPlotInset == 1)   ) &amp;&amp;  !($expInsetMean == 1 || $expInsetNobs == 1|| $expInsetMedian == 1 || $expInsetStd == 1 || $expInsetVariance == 1 )) )">
+            <Message nlsKey="expInsetStatRequirementKey">Select at least one inset statistic to display for the Exponential distribution plots in the Fitting Distributions section.</Message>
+        </Requirement>
+        <Requirement condition="( !( ( ($gammaHistogram == 1 &amp;&amp; $gammaHistogramInset == 1) ||  ($gammaProbPlot == 1 &amp;&amp; $gammaProbPlotInset == 1) ||  ($gammaQQPlot == 1 &amp;&amp; $gammaQQPlotInset == 1)   ) &amp;&amp;  !($gammaInsetMean == 1 || $gammaInsetNobs == 1|| $gammaInsetMedian == 1 || $gammaInsetStd == 1 || $gammaInsetVariance == 1 )) )">
+            <Message nlsKey="gammaInsetStatRequirementKey">Select at least one inset statistic to display for the Gamma distribution plots in the Fitting Distributions section.</Message>
+        </Requirement>
+        <Requirement condition="( !( ( ($lognormalHistogram == 1 &amp;&amp; $lognormalHistogramInset == 1) ||  ($lognormalProbPlot == 1 &amp;&amp; $lognormalProbPlotInset == 1) ||  ($lognormalQQPlot == 1 &amp;&amp; $lognormalQQPlotInset == 1)   ) &amp;&amp;  !($lognormalInsetMean == 1 || $lognormalInsetNobs == 1|| $lognormalInsetMedian == 1 || $lognormalInsetStd == 1 || $lognormalInsetVariance == 1 )) )">
+            <Message nlsKey="lognormalInsetStatRequirementKey">Select at least one inset statistic to display for the Lognormal distribution plots in the Fitting Distributions section.</Message>
+        </Requirement>
+        <Requirement condition="( !( ( ($weibullHistogram == 1 &amp;&amp; $weibullHistogramInset == 1) ||  ($weibullProbPlot == 1 &amp;&amp; $weibullProbPlotInset == 1) ||  ($weibullQQPlot == 1 &amp;&amp; $weibullQQPlotInset == 1)   ) &amp;&amp;  !($weibullInsetMean == 1 || $weibullInsetNobs == 1|| $weibullInsetMedian == 1 || $weibullInsetStd == 1 || $weibullInsetVariance == 1 )) )">
+            <Message nlsKey="weibullInsetStatRequirementKey">Select at least one inset statistic to display for the Weibull distribution plots in the Fitting Distributions section.</Message>
+        </Requirement>
+    </Requirements>
+    <CodeTemplate><![CDATA[
+ods noproctitle;
+ods graphics / imagemap=on;
+
+#if ($byVariables.size() > 0)
+proc sort data=$dataset out=Work.SortTempTableSorted;
+   #if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+   #end
+   by #foreach( $item in $byVariables ) $item #end;
+run;
+#end
+
+### Exploring data
+
+#if ( $histogram == "1" )
+/* $commentExplore */
+   #if ($byVariables.size() > 0)
+proc univariate data=Work.SortTempTableSorted 
+   #else
+proc univariate data=$dataset 
+   #end
+;
+
+   #if ($byVariables.size() == 0 && $dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+   #end
+
+## ODS SELECT
+   ods select Histogram;
+
+   #if ( $analysisVariables.size() > 0 )
+   var #foreach( $item in $analysisVariables ) $item #end;
+   #end
+
+   #if ( $classVariables.size() > 0 )
+   class #foreach( $item in $classVariables ) $item #end;
+   #end
+
+   #if ( $histogram == "1" )
+   histogram #foreach( $item in $analysisVariables ) $item #end
+      #if ($addHistogramNormal == 1 || $addHistogramKernel == 1) / #end
+      #if ($addHistogramNormal == 1) normal#end
+      #if ($addHistogramKernel == 1) kernel#end
+;
+
+      #if ($histogramInset == 1)   inset #if ($histogramInsetNobs == 1) n#end
+      #if ($histogramInsetMean == 1) mean#end
+      #if ($histogramInsetMedian == 1) median#end
+      #if ($histogramInsetStd == 1) std#end
+      #if ($histogramInsetVariance == 1) var#end
+      #if ($histogramInsetSkewness == 1) skewness#end
+      #if ($histogramInsetKurtosis == 1) kurtosis#end
+  / position=ne;
+      #end
+   #end
+
+   #if( $freqVariable.size() > 0 )
+    freq #foreach( $item in $freqVariable ) $item #end;
+   #end
+   #if( $byVariables.size() > 0 )
+    by #foreach( $item in $byVariables ) $item #end;
+   #end
+run;
+#end
+
+##
+## Checking for Normality and Fitting Distributions
+##
+#if($normalityTests == 1 || 
+    $normalHistogram == 1 || $betaHistogram == 1 || $expHistogram == 1 || $gammaHistogram == 1 || $lognormalHistogram == 1 || $weibullHistogram == 1 ||
+    $normalityProbPlot == 1 || $betaProbPlot == 1 || $expProbPlot == 1 || $gammaProbPlot == 1 || $lognormalProbPlot == 1 || $weibullProbPlot == 1 ||
+    $normalityQqPlot == 1 || $betaQQPlot == 1 || $expQQPlot == 1 || $gammaQQPlot == 1 || $lognormalQQPlot == 1 || $weibullQQPlot == 1)
+
+   #if ($byVariables.size() > 0)
+proc univariate data=Work.SortTempTableSorted 
+   #else
+proc univariate data=$dataset 
+   #end
+ 
+   #if ($normalityTests == 1 || $normalityInsetGoodnessOfFit == 1 ) normal#end
+;
+   #if ($byVariables.size() == 0 && $dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+   #end
+
+## ODS SELECT
+   ods select 
+   ##if ($normalityTests == 1 || $normalityInsetGoodnessOfFit == 1)
+## TestsForNormality
+   ##end
+   #if($normalHistogram == 1 || $betaHistogram == 1 || $expHistogram == 1 || $gammaHistogram == 1 || $lognormalHistogram == 1 || $weibullHistogram == 1)
+ Histogram GoodnessOfFit
+   #end
+   #if($normalityProbPlot == 1 || $betaProbPlot == 1 || $expProbPlot == 1 || $gammaProbPlot == 1 || $lognormalProbPlot == 1 || $weibullProbPlot == 1)
+ ProbPlot
+   #end
+   #if($normalityQqPlot == 1 || $betaQQPlot == 1 || $expQQPlot == 1 || $gammaQQPlot == 1 || $lognormalQQPlot == 1 || $weibullQQPlot == 1)
+ QQPlot
+   #end
+;
+
+   #if ( $analysisVariables.size() > 0 )
+   var #foreach( $item in $analysisVariables ) $item #end;
+   #end
+
+##
+## Checking for Normality
+##
+#if ( $normalHistogram == 1 || $normalityProbPlot == 1 || $normalityQqPlot == 1)
+/* $commentNormality */
+#if ( $normalHistogram == 1 )   histogram #foreach( $item in $analysisVariables ) $item #end / normal(mu=est sigma=est); 
+#if ($normalityHistogramInset == 1)   inset #if ($normalityInsetGoodnessOfFit == 1) normaltest pnormal#end
+#if ($normalityInsetMean == 1) mean#end
+#if ($normalityInsetMedian == 1) median#end
+#if ($normalityInsetStd == 1) std#end
+#if ($normalityInsetVariance == 1) var#end
+#if ($normalityInsetSkewness == 1) skewness#end
+#if ($normalityInsetKurtosis == 1) kurtosis#end
+#if ($normalityInsetNobs == 1) n#end
+ / position=ne;
+#end
+#end
+
+#if ( $normalityProbPlot == 1 )   probplot #foreach( $item in $analysisVariables ) $item #end / normal(mu=est sigma=est)
+;
+#if ($normalityProbPlotInset == 1)   inset #if ($normalityInsetGoodnessOfFit == 1) normaltest pnormal#end
+#if ($normalityInsetMean == 1) mean#end
+#if ($normalityInsetMedian == 1) median#end
+#if ($normalityInsetStd == 1) std#end
+#if ($normalityInsetVariance == 1) var#end
+#if ($normalityInsetSkewness == 1) skewness#end
+#if ($normalityInsetKurtosis == 1) kurtosis#end
+#if ($normalityInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+
+#if ( $normalityQqPlot == 1 )   qqplot #foreach( $item in $analysisVariables ) $item #end / normal(mu=est sigma=est)
+;
+#if ($normalityQQPlotInset == 1)   inset #if ($normalityInsetGoodnessOfFit == 1) normaltest pnormal#end
+#if ($normalityInsetMean == 1) mean#end
+#if ($normalityInsetMedian == 1) median#end
+#if ($normalityInsetStd == 1) std#end
+#if ($normalityInsetVariance == 1) var#end
+#if ($normalityInsetSkewness == 1) skewness#end
+#if ($normalityInsetKurtosis == 1) kurtosis#end
+#if ($normalityInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+#end ## end of Checking for Normality
+
+##
+## Fitting Distributions
+##
+   #if($betaHistogram == 1 || $expHistogram == 1 || $gammaHistogram == 1 || $lognormalHistogram == 1 || $weibullHistogram == 1 ||
+    $betaProbPlot == 1 || $expProbPlot == 1 || $gammaProbPlot == 1 || $lognormalProbPlot == 1 || $weibullProbPlot == 1 ||
+    $betaQQPlot == 1 || $expQQPlot == 1 || $gammaQQPlot == 1 || $lognormalQQPlot == 1 || $weibullQQPlot == 1)
+/* $commentFitting */
+
+   #if($betaHistogram == 1) histogram #foreach( $item in $analysisVariables ) $item #end /  beta(alpha=est beta=est sigma=1 theta=0);
+      #if ($betaHistogramInset == 1)   inset #if ($betaInsetMean == 1) mean#end
+      #if ($betaInsetMedian == 1) median#end
+      #if ($betaInsetStd == 1) std#end
+      #if ($betaInsetVariance == 1) var#end
+      #if ($betaInsetSkewness == 1) skewness#end
+      #if ($betaInsetKurtosis == 1) kurtosis#end
+      #if ($betaInsetNobs == 1) n#end
+ / position=ne;
+      #end
+   #end
+   
+   #if($betaProbPlot == 1) probplot #foreach( $item in $analysisVariables ) $item #end / beta(alpha=est beta=est sigma=1 theta=0);
+      #if ($betaProbPlotInset == 1)   inset #if ($betaInsetMean == 1) mean#end
+      #if ($betaInsetMedian == 1) median#end
+      #if ($betaInsetStd == 1) std#end
+      #if ($betaInsetVariance == 1) var#end
+      #if ($betaInsetSkewness == 1) skewness#end
+      #if ($betaInsetKurtosis == 1) kurtosis#end
+      #if ($betaInsetNobs == 1) n#end
+ / position=nw;
+      #end
+   #end
+   
+   #if($betaQQPlot == 1) qqplot #foreach( $item in $analysisVariables ) $item #end / beta(alpha=est beta=est sigma=1 theta=0);
+      #if ($betaQQPlotInset == 1)   inset #if ($betaInsetMean == 1) mean#end
+      #if ($betaInsetMedian == 1) median#end
+      #if ($betaInsetStd == 1) std#end
+      #if ($betaInsetVariance == 1) var#end
+      #if ($betaInsetSkewness == 1) skewness#end
+      #if ($betaInsetKurtosis == 1) kurtosis#end
+      #if ($betaInsetNobs == 1) n#end
+ / position=nw;
+      #end
+   #end
+
+#if($expHistogram == 1) histogram #foreach( $item in $analysisVariables ) $item #end / exp(sigma=est theta=0);
+#if ($expHistogramInset == 1)   inset #if ($expInsetMean == 1) mean#end
+#if ($expInsetMedian == 1) median#end
+#if ($expInsetStd == 1) std#end
+#if ($expInsetVariance == 1) var#end
+#if ($expInsetSkewness == 1) skewness#end
+#if ($expInsetKurtosis == 1) kurtosis#end
+#if ($expInsetNobs == 1) n#end
+ / position=ne;
+#end
+#end
+#if($expProbPlot == 1) probplot #foreach( $item in $analysisVariables ) $item #end / exp(sigma=est theta=0);
+#if ($expProbPlotInset == 1)   inset #if ($expInsetMean == 1) mean#end
+#if ($expInsetMedian == 1) median#end
+#if ($expInsetStd == 1) std#end
+#if ($expInsetVariance == 1) var#end
+#if ($expInsetSkewness == 1) skewness#end
+#if ($expInsetKurtosis == 1) kurtosis#end
+#if ($expInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+#if($expQQPlot == 1) qqplot #foreach( $item in $analysisVariables ) $item #end / exp(sigma=est theta=0);
+#if ($expQQPlotInset == 1)   inset #if ($expInsetMean == 1) mean#end
+#if ($expInsetMedian == 1) median#end
+#if ($expInsetStd == 1) std#end
+#if ($expInsetVariance == 1) var#end
+#if ($expInsetSkewness == 1) skewness#end
+#if ($expInsetKurtosis == 1) kurtosis#end
+#if ($expInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+
+#if($gammaHistogram == 1) histogram #foreach( $item in $analysisVariables ) $item #end /  gamma(alpha=est sigma=est theta=0);
+#if ($gammaHistogramInset == 1)   inset #if ($gammaInsetMean == 1) mean#end
+#if ($gammaInsetMedian == 1) median#end
+#if ($gammaInsetStd == 1) std#end
+#if ($gammaInsetVariance == 1) var#end
+#if ($gammaInsetSkewness == 1) skewness#end
+#if ($gammaInsetKurtosis == 1) kurtosis#end
+#if ($gammaInsetNobs == 1) n#end
+ / position=ne;
+#end
+#end
+#if($gammaProbPlot == 1) probplot #foreach( $item in $analysisVariables ) $item #end / gamma(alpha=est sigma=est theta=0);
+#if ($gammaProbPlotInset == 1)   inset #if ($gammaInsetMean == 1) mean#end
+#if ($gammaInsetMedian == 1) median#end
+#if ($gammaInsetStd == 1) std#end
+#if ($gammaInsetVariance == 1) var#end
+#if ($gammaInsetSkewness == 1) skewness#end
+#if ($gammaInsetKurtosis == 1) kurtosis#end
+#if ($gammaInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+#if($gammaQQPlot == 1) qqplot #foreach( $item in $analysisVariables ) $item #end / gamma(alpha=est sigma=est theta=0);
+#if ($gammaQQPlotInset == 1)   inset #if ($gammaInsetMean == 1) mean#end
+#if ($gammaInsetMedian == 1) median#end
+#if ($gammaInsetStd == 1) std#end
+#if ($gammaInsetVariance == 1) var#end
+#if ($gammaInsetSkewness == 1) skewness#end
+#if ($gammaInsetKurtosis == 1) kurtosis#end
+#if ($gammaInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+
+#if($lognormalHistogram == 1) histogram #foreach( $item in $analysisVariables ) $item #end /  lognormal(sigma=est theta=0 zeta=est);
+#if ($lognormalHistogramInset == 1)   inset #if ($lognormalInsetMean == 1) mean#end
+#if ($lognormalInsetMedian == 1) median#end
+#if ($lognormalInsetStd == 1) std#end
+#if ($lognormalInsetVariance == 1) var#end
+#if ($lognormalInsetSkewness == 1) skewness#end
+#if ($lognormalInsetKurtosis == 1) kurtosis#end
+#if ($lognormalInsetNobs == 1) n#end
+ / position=ne;
+#end
+#end
+#if($lognormalProbPlot == 1) probplot #foreach( $item in $analysisVariables ) $item #end / lognormal(sigma=est theta=0 zeta=est);
+#if ($lognormalProbPlotInset == 1)   inset #if ($lognormalInsetMean == 1) mean#end
+#if ($lognormalInsetMedian == 1) median#end
+#if ($lognormalInsetStd == 1) std#end
+#if ($lognormalInsetVariance == 1) var#end
+#if ($lognormalInsetSkewness == 1) skewness#end
+#if ($lognormalInsetKurtosis == 1) kurtosis#end
+#if ($lognormalInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+#if($lognormalQQPlot == 1) qqplot #foreach( $item in $analysisVariables ) $item #end / lognormal(sigma=est theta=0 zeta=est);
+#if ($lognormalQQPlotInset == 1)   inset #if ($lognormalInsetMean == 1) mean#end
+#if ($lognormalInsetMedian == 1) median#end
+#if ($lognormalInsetStd == 1) std#end
+#if ($lognormalInsetVariance == 1) var#end
+#if ($lognormalInsetSkewness == 1) skewness#end
+#if ($lognormalInsetKurtosis == 1) kurtosis#end
+#if ($lognormalInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+
+#if($weibullHistogram == 1) histogram #foreach( $item in $analysisVariables ) $item #end /  weibull(c=est  sigma=est theta=0);
+#if ($weibullHistogramInset == 1)   inset #if ($weibullInsetMean == 1) mean#end
+#if ($weibullInsetMedian == 1) median#end
+#if ($weibullInsetStd == 1) std#end
+#if ($weibullInsetVariance == 1) var#end
+#if ($weibullInsetSkewness == 1) skewness#end
+#if ($weibullInsetKurtosis == 1) kurtosis#end
+#if ($weibullInsetNobs == 1) n#end
+ / position=ne;
+#end
+#end
+#if($weibullProbPlot == 1) probplot #foreach( $item in $analysisVariables ) $item #end / weibull(c=est  sigma=est theta=0);
+#if ($weibullProbPlotInset == 1)   inset #if ($weibullInsetMean == 1) mean#end
+#if ($weibullInsetMedian == 1) median#end
+#if ($weibullInsetStd == 1) std#end
+#if ($weibullInsetVariance == 1) var#end
+#if ($weibullInsetSkewness == 1) skewness#end
+#if ($weibullInsetKurtosis == 1) kurtosis#end
+#if ($weibullInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+#if($weibullQQPlot == 1) qqplot #foreach( $item in $analysisVariables ) $item #end / weibull(c=est  sigma=est theta=0);
+#if ($weibullQQPlotInset == 1)   inset #if ($weibullInsetMean == 1) mean#end
+#if ($weibullInsetMedian == 1) median#end
+#if ($weibullInsetStd == 1) std#end
+#if ($weibullInsetVariance == 1) var#end
+#if ($weibullInsetSkewness == 1) skewness#end
+#if ($weibullInsetKurtosis == 1) kurtosis#end
+#if ($weibullInsetNobs == 1) n#end
+ / position=nw;
+#end
+#end
+#end ## end of Fitting Distributions
+
+#if( $freqVariable.size() > 0 )
+    freq #foreach( $item in $freqVariable ) $item #end;
+#end
+#if( $byVariables.size() > 0 )
+    by #foreach( $item in $byVariables ) $item #end;
+#end
+run;
+#end
+
+#if ($byVariables.size() > 0)
+proc delete data=Work.SortTempTableSorted; run;
+#end
+]]></CodeTemplate>
+    
+
+
+
+
+
+<TemplateValues version="3.8">
+<![CDATA[
+{"histogramInsetMedian":"","lognormalProbPlotInset":"","commentExplore":"Exploring Data","normalityInsetMedian":"","sasOS":"Linux LIN X64 3.10.0-1062.4.1.el7.x86_64","expInsetNobs":"1","addHistogramKernel":"","weibullInsetStd":"","lognormalInsetMean":"","addHistogramNormal":"1","normalityInsetMean":"","expInsetMean":"","lognormalQQPlot":"","gammaGroup":"Gamma","gammaQQPlotInset":"","histogramInsetMean":"","lognormalInsetNobs":"1","betaQQPlot":"","normalityInsetNobs":"1","byVariables":"","gammaInsetVariance":"","expInsetGroup":"Inset Statistics","analysisVariables":"json:[{\"value\":\"Item_Visibility\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"},{\"value\":\"Item_Outlet_Sales\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"},{\"value\":\"sqrt_Item_Visibility\",\"type\":\"Numeric\",\"length\":8,\"format\":\"\",\"informat\":\"\",\"className\":\"RoleObject\"},{\"value\":\"sqrt_Item_Outlet_Sales\",\"type\":\"Numeric\",\"length\":8,\"format\":\"\",\"informat\":\"\",\"className\":\"RoleObject\"},{\"value\":\"sqrt_sqrt_Item_Visibility\",\"type\":\"Numeric\",\"length\":8,\"format\":\"\",\"informat\":\"\",\"className\":\"RoleObject\"},{\"value\":\"sqrt_sqrt_Item_Outlet_Sales\",\"type\":\"Numeric\",\"length\":8,\"format\":\"\",\"informat\":\"\",\"className\":\"RoleObject\"}]","betaInsetMean":"","freqVariable":"","betaInsetNobs":"1","commentNormality":"Checking for Normality","histogramGroup":"EXPLORING DATA","betaInsetStd":"","classVariables":"","histogramInsetSkewness":"","lognormalHistogram":"","normalityQqPlotReferenceLine":"","betaInsetSkewness":"","weibullProbPlotInset":"","gammaInsetKurtosis":"","histogramInsetVariance":"","betaInsetVariance":"","gammaInsetMedian":"","gammaInsetStd":"","rolesGroup":"ROLES","probPlotReferenceLine":"","betaInsetGroup":"Inset Statistics","gammaInsetSkewness":"","normalityInsetSkewness":"","expInsetMedian":"","expProbPlot":"","normalityProbPlot":"","gammaQQPlot":"","normalityQQPlotInset":"","expQQPlot":"","normalHistogram":"","betaProbPlotInset":"","histogramInsetStd":"","betaGroup":"Beta","expInsetKurtosis":"","sasVersion":"9.46","normalityInsetKurtosis":"","lognormalProbPlot":"","expHistogram":"","histogramInset":"","weibullHistogram":"","dataset":{"librarytable":"WORK.BIGMARTSALES"},"gammaHistogram":"","lognormalHistogramInset":"","weibullInsetVariance":"","betaInsetMedian":"","lognormalInsetKurtosis":"","weibullInsetSkewness":"","weibullInsetMean":"","dataTab":"DATA","normalityInsetGroup":"Inset Statistics","weibullProbPlot":"","commentFitting":"Fitting Distributions","expGroup":"Exponential","expHistogramInset":"","fitDifferentDistsGroup":"FITTING DISTRIBUTIONS","histogramInsetKurtosis":"","expQQPlotInset":"","gammaInsetGroup":"Inset Statistics","histogramInsetGroup":"Inset Statistics","betaInsetKurtosis":"","weibullGroup":"Weibull","expInsetVariance":"","betaQQPlotInset":"","betaProbPlot":"","weibullQQPlot":"","histogramInsetNoframe":"1","betaHistogram":"","gammaHistogramInset":"","expInsetSkewness":"","histogram":"1","lognormalInsetStd":"","normalityInsetVariance":"","weibullHistogramInset":"","weibullInsetMedian":"","lognormalInsetSkewness":"","normalityTests":"","lognormalQQPlotInset":"","plotsGroup":"PLOTS","expInsetStd":"","normalityInsetStd":"","normalityGroup":"CHECKING FOR NORMALITY","lognormalInsetVariance":"","gammaInsetMean":"","normalityInsetGoodnessOfFit":"0","gammaProbPlotInset":"","normalityProbPlotReferenceLine":"","optionsGroup":"TABLES","otherRolesGroup":"ADDITIONAL ROLES","normalityProbPlotInset":"","lognormalGroup":"Lognormal","gammaInsetNobs":"1","lognormalInsetGroup":"Inset Statistics","betaHistogramInset":"","expProbPlotInset":"","histogramInsetNobs":"1","weibullInsetGroup":"Inset Statistics","normalityHistogramInset":"","gammaProbPlot":"","dataGroup":"DATA","weibullQQPlotInset":"","weibullInsetNobs":"1","normalProbPlot":"","optionsTab":"OPTIONS","normalityQqPlot":"","lognormalInsetMedian":"","weibullInsetKurtosis":""}
+]]>
+</TemplateValues>
+</Task>

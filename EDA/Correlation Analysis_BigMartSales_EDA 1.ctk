@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Task schemaVersion="5.4">
+    <Registration>
+        <Name>Correlation Analysis</Name>
+        <Description>The Correlation Analysis task provides graphs and statistics for investigating associations among variables.</Description>
+        <GUID>29204f37-5362-4422-8cb2-443c10509003</GUID>
+        <Procedures>CORR</Procedures>
+        <Version>3.8</Version>
+        <Links>
+            <Link href="http://documentation.sas.com/?softwareId=STUDIOMID&amp;softwareVersion=3.8&amp;softwareContextId=tasks&amp;requestor=inapp">SAS Studio Task Reference Guide</Link>
+            <Link href=""/>
+            <Link href=""/>
+            <Link href="http://documentation.sas.com/?softwareId=MVADOC&amp;softwareVersion=3.8_9.4&amp;softwareContextId=proc_corr&amp;requestor=inapp">The CORR Procedure</Link>
+            <Link href=""/>
+            <Link href=""/>
+            <Link href="http://support.sas.com/training/studio">SAS Tutorials</Link>
+        </Links>
+    </Registration>
+    <Metadata>
+        <DataSources>
+            <DataSource name="dataset" where="true">
+                <Roles>
+                    <Role
+                        exclude="withVariables,partialVariables,freqVariable,weightVariable,byVariables"
+                        maxVars="0" minVars="0" name="analysisVariables"
+                        order="true" type="N">Analysis variables:</Role>
+                    <Role
+                        exclude="analysisVariables,partialVariables,freqVariable,weightVariable,byVariables"
+                        maxVars="0" minVars="0" name="withVariables"
+                        order="true" type="N">Correlate with:</Role>
+                    <Role
+                        exclude="analysisVariables,withVariables,freqVariable,weightVariable,byVariables"
+                        maxVars="0" minVars="0" name="partialVariables" type="N">Partial variables:</Role>
+                    <Role
+                        exclude="analysisVariables,withVariables,partialVariables,weightVariable,byVariables"
+                        maxVars="1" minVars="0" name="freqVariable" type="N">Frequency count:</Role>
+                    <Role
+                        exclude="analysisVariables,withVariables,partialVariables,freqVariable,byVariables"
+                        maxVars="1" minVars="0" name="weightVariable" type="N">Weight:</Role>
+                    <Role
+                        exclude="analysisVariables,withVariables,partialVariables,freqVariable,weightVariable"
+                        maxVars="0" minVars="0" name="byVariables"
+                        order="true" type="A">Group analysis by:</Role>
+                </Roles>
+            </DataSource>
+        </DataSources>
+        <Options>
+            <Option inputType="string" name="dataTab">DATA</Option>
+            <Option inputType="string" name="optionsTab">OPTIONS</Option>
+            <Option inputType="string" name="dataGroup">DATA</Option>
+            <Option inputType="string" name="rolesGroup">ROLES</Option>
+            <Option inputType="string" name="otherRolesGroup">ADDITIONAL ROLES</Option>
+            <Option inputType="string" name="methodsGroup">METHODS</Option>
+            <Option inputType="string" name="tablesGroup">STATISTICS</Option>
+            <Option defaultValue="defaultPrint" inputType="combobox" name="printCombo">Display statistics:</Option>
+            <Option inputType="string" name="defaultPrint">Default statistics</Option>
+            <Option inputType="string" name="customPrint">Selected statistics</Option>
+            <Option inputType="string" name="noprint">None</Option>
+            <Option defaultValue="1" indent="1" inputType="checkbox" name="corr">Correlations</Option>
+            <Option indent="1" inputType="checkbox" name="cov">Covariances</Option>
+            <Option indent="1" inputType="checkbox" name="sscp">Sum of squares and cross-products</Option>
+            <Option indent="1" inputType="checkbox" name="csscp">Corrected sum of squares and cross-products</Option>
+            <Option indent="1" inputType="checkbox" name="simpleStatistics">Descriptive statistics</Option>
+            <Option defaultValue="1" indent="2" inputType="checkbox" name="pvalues">Display p-values</Option>
+            <Option indent="2" inputType="checkbox" name="rank">Order correlations from highest to lowest (in absolute value)</Option>
+            <Option inputType="string" name="outputTab">OUTPUT</Option>
+            <Option inputType="string" name="outputGroup">OUTPUT DATA SET</Option>
+            <Option inputType="checkbox" name="outputDS">Create output data set</Option>
+            <Option defaultValue="work.Corr_stats" indent="1"
+                inputType="outputdata" name="outputDSName"
+                required="true" unique="true">Data set name:</Option>
+            <Option defaultValue="pairwiseMissing" inputType="combobox" name="missingValues">Missing values:</Option>
+            <Option inputType="string" name="obswiseMissing">Use nonmissing values for all selected variables</Option>
+            <Option inputType="string" name="pairwiseMissing">Use nonmissing values for pairs of variables</Option>
+            <Option indent="1" inputType="string" name="statsToAddLabel">Statistics to include in the output data set:</Option>
+            <Option defaultValue="1" indent="2" inputType="checkbox" name="includeCorr">Correlations</Option>
+            <Option indent="2" inputType="checkbox" name="includeCov">Covariances</Option>
+            <Option indent="2" inputType="checkbox" name="includeSscp">Sum of squares and cross-products</Option>
+            <Option indent="2" inputType="checkbox" name="includeCsscp">Corrected sum of squares and cross-products</Option>
+            <Option inputType="string" name="fisherGroup">FISHER'S Z TRANSFORMATION</Option>
+            <Option indent="1" inputType="checkbox" name="fisherZ">Fisher's z transformation</Option>
+            <Option defaultValue="0" indent="2" inputType="numbertext"
+                invalidMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for two-sided confidence limits"
+                maxValue="0.9999999999" minValue="-0.9999999999"
+                missingMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for two-sided confidence limits"
+                name="nullRho2"
+                promptMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for two-sided confidence limits"
+                rangeMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for two-sided confidence limits"
+                required="true" width="100px">Null hypothesis: rho =</Option>
+            <Option defaultValue="0" indent="2" inputType="numbertext"
+                invalidMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for upper one-sided confidence limit"
+                maxValue="0.9999999999" minValue="-0.9999999999"
+                missingMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for upper one-sided confidence limit"
+                name="nullRhoU"
+                promptMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for upper one-sided confidence limit"
+                rangeMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for upper one-sided confidence limit"
+                required="true" width="100px">Null hypothesis: rho &gt;=</Option>
+            <Option defaultValue="0" indent="2" inputType="numbertext"
+                invalidMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for lower one-sided confidence limit"
+                maxValue="0.9999999999" minValue="-0.9999999999"
+                missingMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for lower one-sided confidence limit"
+                name="nullRhoL"
+                promptMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for lower one-sided confidence limit"
+                rangeMessage="Enter a number greater than -1 and less than 1 for the null hypothesis correlation for lower one-sided confidence limit"
+                required="true" width="100px">Null hypothesis: rho &lt;=</Option>
+            <Option defaultValue="twosidedLimit" indent="2"
+                inputType="combobox" name="fisherConfType">Type of confidence limits:</Option>
+            <Option inputType="string" name="twosidedLimit">Two-sided confidence limits</Option>
+            <Option inputType="string" name="upperLimit">Upper confidence limit</Option>
+            <Option inputType="string" name="lowerLimit">Lower confidence limit</Option>
+            <Option defaultValue="confidence95" indent="2"
+                inputType="combobox" name="fisherConfidence">Confidence level:</Option>
+            <Option inputType="string" name="confidence90">90%</Option>
+            <Option inputType="string" name="confidence95">95%</Option>
+            <Option inputType="string" name="confidence99">99%</Option>
+            <Option inputType="string" name="confidenceSpecify">Use custom value</Option>
+            <Option decimalPlaces="0,15" defaultValue="95" indent="3"
+                inputType="numbertext"
+                invalidMessage="Enter a number greater than zero and less than 100 for the confidence level"
+                maxValue="99.999999999" minValue="0.00000000001"
+                missingMessage="Enter a number greater than zero and less than 100 for the confidence level"
+                name="fisherConfidenceValue"
+                promptMessage="Enter a number greater than zero and less than 100 for the confidence level"
+                rangeMessage="Enter a number greater than zero and less than 100 for the confidence level"
+                required="true" width="75px">Custom confidence level:</Option>
+            <Option decimalPlaces="0,15" defaultValue="95" indent="3"
+                inputType="numbertext"
+                invalidMessage="Enter a number greater than zero and less than 100 for the confidence level"
+                maxValue="99.999999999" minValue="0.00000000001"
+                missingMessage="Enter a number greater than zero and less than 100 for the confidence level"
+                name="confidenceValue"
+                promptMessage="Enter a number greater than zero and less than 100 for the confidence level"
+                rangeMessage="Enter a number greater than zero and less than 100 for the confidence level"
+                required="true" width="75px">Custom confidence level:</Option>
+            <Option inputType="string" name="plotGroup">PLOTS</Option>
+            <Option defaultValue="noPlots" inputType="combobox" name="plotType">Type of plot:</Option>
+            <Option inputType="string" name="matrixPlots">Matrix of scatter plots</Option>
+            <Option inputType="string" name="scatterPlots">Individual scatter plots</Option>
+            <Option inputType="string" name="noPlots">None</Option>
+            <Option indent="1" inputType="checkbox" name="includeEllipse">Include ellipse</Option>
+            <Option defaultValue="predictionEllipse" indent="2"
+                inputType="combobox" name="ellipseType" width="175px">Ellipse:</Option>
+            <Option inputType="string" name="confidenceEllipse">Confidence ellipse</Option>
+            <Option inputType="string" name="predictionEllipse">Prediction ellipse</Option>
+            <Option defaultValue="confidence95" indent="2"
+                inputType="combobox" name="ellipseConfidence" width="175px">Confidence level:</Option>
+            <Option indent="1" inputType="checkbox" name="includeHistogram">Include histograms</Option>
+            <Option defaultValue="1" indent="1" inputType="checkbox" name="includeInset">Include inset statistics</Option>
+            <Option defaultValue="maxpointsDefault" inputType="combobox" name="maxpointsCombo">Maximum number of plot points:</Option>
+            <Option inputType="string" name="maxpointsDefault">Default(5,000)</Option>
+            <Option inputType="string" name="maxpoints10000">10,000</Option>
+            <Option inputType="string" name="maxpointsSpecify">Use custom value</Option>
+            <Option inputType="string" name="maxpointsNoLimit">No limit</Option>
+            <Option decimalPlaces="0" defaultValue="5000" indent="1"
+                inputType="numbertext"
+                invalidMessage="Enter an integer number greater than zero for the maximum number of plot points"
+                minValue="1"
+                missingMessage="Enter an integer number greater than zero for the maximum number of plot points"
+                name="maxpointsValue"
+                promptMessage="Enter an integer number greater than zero for the maximum number of plot points"
+                rangeMessage="Enter an integer number greater than zero for the maximum number of plot points" required="true">Custom maximum number of points:</Option>
+            <Option defaultValue="nvarsToPlot_5" inputType="combobox"
+                name="nvarsToPlot" width="100px">Number of variables to plot:</Option>
+            <Option inputType="string" name="nvarsToPlot_1">1</Option>
+            <Option inputType="string" name="nvarsToPlot_2">2</Option>
+            <Option inputType="string" name="nvarsToPlot_3">3</Option>
+            <Option inputType="string" name="nvarsToPlot_4">4</Option>
+            <Option inputType="string" name="nvarsToPlot_5">5</Option>
+            <Option inputType="string" name="nvarsToPlot_6">6</Option>
+            <Option inputType="string" name="nvarsToPlot_7">7</Option>
+            <Option inputType="string" name="nvarsToPlot_8">8</Option>
+            <Option inputType="string" name="nvarsToPlot_9">9</Option>
+            <Option inputType="string" name="nvarsToPlot_10">10</Option>
+            <Option inputType="string" name="nvarsToPlot_All">All</Option>
+            <Option inputType="string" name="nonparGroup">Nonparametric Correlations</Option>
+            <Option inputType="checkbox" name="spearmanCorr">Spearman's rank-order correlation</Option>
+            <Option inputType="checkbox" name="kendallTau">Kendall's tau-b</Option>
+            <Option inputType="checkbox" name="hoeffding">Hoeffding's measure of dependence</Option>
+        </Options>
+    </Metadata>
+    <UI>
+        <Container option="dataTab">
+            <Group open="true" option="dataGroup">
+                <DataItem data="dataset"/>
+            </Group>
+            <Group open="true" option="rolesGroup">
+                <RoleItem role="analysisVariables"/>
+                <RoleItem role="withVariables"/>
+                <RoleItem role="partialVariables"/>
+            </Group>
+            <Group option="otherRolesGroup">
+                <RoleItem role="freqVariable"/>
+                <RoleItem role="weightVariable"/>
+                <RoleItem role="byVariables"/>
+            </Group>
+        </Container>
+        <Container option="optionsTab">
+            <Group option="methodsGroup">
+                <OptionChoice option="missingValues">
+                    <OptionItem option="obswiseMissing"/>
+                    <OptionItem option="pairwiseMissing"/>
+                </OptionChoice>
+            </Group>
+            <Group open="true" option="tablesGroup">
+                <OptionChoice option="printCombo">
+                    <OptionItem option="defaultPrint"/>
+                    <OptionItem option="customPrint"/>
+                    <OptionItem option="noprint"/>
+                </OptionChoice>
+                <OptionItem option="corr"/>
+                <OptionItem option="pvalues"/>
+                <OptionItem option="rank"/>
+                <OptionItem option="cov"/>
+                <OptionItem option="sscp"/>
+                <OptionItem option="csscp"/>
+                <OptionItem option="simpleStatistics"/>
+                <OptionItem option="fisherZ"/>
+                <OptionChoice option="fisherConfType">
+                    <OptionItem option="twosidedLimit"/>
+                    <OptionItem option="lowerLimit"/>
+                    <OptionItem option="upperLimit"/>
+                </OptionChoice>
+                <OptionChoice option="fisherConfidence">
+                    <OptionItem option="confidence90"/>
+                    <OptionItem option="confidence95"/>
+                    <OptionItem option="confidence99"/>
+                    <OptionItem option="confidenceSpecify"/>
+                </OptionChoice>
+                <OptionItem option="fisherConfidenceValue"/>
+                <OptionItem option="nullRho2"/>
+                <OptionItem option="nullRhoU"/>
+                <OptionItem option="nullRhoL"/>
+                <Group option="nonparGroup">
+                    <OptionItem option="spearmanCorr"/>
+                    <OptionItem option="kendallTau"/>
+                    <OptionItem option="hoeffding"/>
+                </Group>
+            </Group>
+            <Group open="true" option="plotGroup">
+                <OptionChoice option="plotType">
+                    <OptionItem option="matrixPlots"/>
+                    <OptionItem option="scatterPlots"/>
+                    <OptionItem option="noPlots"/>
+                </OptionChoice>
+                <OptionItem option="includeEllipse"/>
+                <OptionChoice option="ellipseType">
+                    <OptionItem option="confidenceEllipse"/>
+                    <OptionItem option="predictionEllipse"/>
+                </OptionChoice>
+                <OptionChoice option="ellipseConfidence">
+                    <OptionItem option="confidence90"/>
+                    <OptionItem option="confidence95"/>
+                    <OptionItem option="confidence99"/>
+                    <OptionItem option="confidenceSpecify"/>
+                </OptionChoice>
+                <OptionItem option="confidenceValue"/>
+                <OptionItem option="includeInset"/>
+                <OptionItem option="includeHistogram"/>
+                <OptionChoice option="nvarsToPlot">
+                    <OptionItem option="nvarsToPlot_1"/>
+                    <OptionItem option="nvarsToPlot_2"/>
+                    <OptionItem option="nvarsToPlot_3"/>
+                    <OptionItem option="nvarsToPlot_4"/>
+                    <OptionItem option="nvarsToPlot_5"/>
+                    <OptionItem option="nvarsToPlot_6"/>
+                    <OptionItem option="nvarsToPlot_7"/>
+                    <OptionItem option="nvarsToPlot_8"/>
+                    <OptionItem option="nvarsToPlot_9"/>
+                    <OptionItem option="nvarsToPlot_10"/>
+                </OptionChoice>
+                <OptionChoice option="maxpointsCombo">
+                    <OptionItem option="maxpointsDefault"/>
+                    <OptionItem option="maxpoints10000"/>
+                    <OptionItem option="maxpointsSpecify"/>
+                    <OptionItem option="maxpointsNoLimit"/>
+                </OptionChoice>
+                <OptionItem option="maxpointsValue"/>
+            </Group>
+        </Container>
+        <Container option="outputTab">
+            <Group open="true" option="outputGroup">
+                <OptionItem option="outputDS"/>
+                <OptionItem option="outputDSName"/>
+                <OptionItem option="statsToAddLabel"/>
+                <OptionItem option="includeCorr"/>
+                <OptionItem option="includeCov"/>
+                <OptionItem option="includeSscp"/>
+                <OptionItem option="includeCsscp"/>
+            </Group>
+        </Container>
+    </UI>
+    <Dependencies>
+        <Dependency condition="($weightVariable.size() == 0)">
+            <Target action="show" conditionResult="true" option="kendallTau"/>
+            <Target action="hide" conditionResult="false" option="kendallTau"/>
+            <Target action="show" conditionResult="true" option="spearmanCorr"/>
+            <Target action="hide" conditionResult="false" option="spearmanCorr"/>
+        </Dependency>
+        <Dependency condition="($partialVariables.size() == 0) &amp;&amp; ($weightVariable.size() == 0)">
+            <Target action="show" conditionResult="true" option="hoeffding"/>
+            <Target action="hide" conditionResult="false" option="hoeffding"/>
+        </Dependency>
+        <Dependency condition="($plotType=='matrixPlots')">
+            <Target action="show" conditionResult="true" option="includeHistogram"/>
+            <Target action="hide" conditionResult="false" option="includeHistogram"/>
+        </Dependency>
+        <Dependency condition="($plotType=='noPlots')">
+            <Target action="hide" conditionResult="true" option="maxpointsCombo"/>
+            <Target action="show" conditionResult="false" option="maxpointsCombo"/>
+            <Target action="hide" conditionResult="true" option="nvarsToPlot"/>
+            <Target action="show" conditionResult="false" option="nvarsToPlot"/>
+        </Dependency>
+        <Dependency condition="($plotType=='scatterPlots')">
+            <Target action="show" conditionResult="true" option="includeEllipse"/>
+            <Target action="hide" conditionResult="false" option="includeEllipse"/>
+            <Target action="show" conditionResult="true" option="ellipseType"/>
+            <Target action="hide" conditionResult="false" option="ellipseType"/>
+            <Target action="show" conditionResult="true" option="ellipseConfidence"/>
+            <Target action="hide" conditionResult="false" option="ellipseConfidence"/>
+            <Target action="show" conditionResult="true" option="includeInset"/>
+            <Target action="hide" conditionResult="false" option="includeInset"/>
+        </Dependency>
+        <Dependency condition="($plotType=='scatterPlots') &amp;&amp; ($includeEllipse == '1')">
+            <Target action="show" conditionResult="true" option="ellipseType"/>
+            <Target action="hide" conditionResult="false" option="ellipseType"/>
+            <Target action="show" conditionResult="true" option="ellipseConfidence"/>
+            <Target action="hide" conditionResult="false" option="ellipseConfidence"/>
+        </Dependency>
+        <Dependency condition="($plotType=='scatterPlots' &amp;&amp; $includeEllipse == '1' &amp;&amp; $ellipseConfidence == 'confidenceSpecify')">
+            <Target action="show" conditionResult="true" option="confidenceValue"/>
+            <Target action="hide" conditionResult="false" option="confidenceValue"/>
+        </Dependency>
+        <Dependency condition="($maxpointsCombo=='maxpointsSpecify')">
+            <Target action="show" conditionResult="true" option="maxpointsValue"/>
+            <Target action="hide" conditionResult="false" option="maxpointsValue"/>
+        </Dependency>
+        <Dependency condition="($printCombo=='customPrint')">
+            <Target action="show" conditionResult="true" option="corr"/>
+            <Target action="hide" conditionResult="false" option="corr"/>
+            <Target action="show" conditionResult="true" option="cov"/>
+            <Target action="hide" conditionResult="false" option="cov"/>
+            <Target action="show" conditionResult="true" option="sscp"/>
+            <Target action="hide" conditionResult="false" option="sscp"/>
+            <Target action="show" conditionResult="true" option="csscp"/>
+            <Target action="hide" conditionResult="false" option="csscp"/>
+            <Target action="show" conditionResult="true" option="simpleStatistics"/>
+            <Target action="hide" conditionResult="false" option="simpleStatistics"/>
+            <Target action="show" conditionResult="true" option="fisherZ"/>
+            <Target action="hide" conditionResult="false" option="fisherZ"/>
+            <Target action="show" conditionResult="true" option="nonparGroup"/>
+            <Target action="hide" conditionResult="false" option="nonparGroup"/>
+        </Dependency>
+        <Dependency condition="($printCombo=='customPrint') &amp;&amp; ($corr=='1')">
+            <Target action="show" conditionResult="true" option="rank"/>
+            <Target action="hide" conditionResult="false" option="rank"/>
+            <Target action="show" conditionResult="true" option="pvalues"/>
+            <Target action="hide" conditionResult="false" option="pvalues"/>
+        </Dependency>
+        <Dependency condition="($outputDS == 1)">
+            <Target action="enable" conditionResult="true" option="outputDSName"/>
+            <Target action="disable" conditionResult="false" option="outputDSName"/>
+            <Target action="show" conditionResult="true" option="statsToAddLabel"/>
+            <Target action="hide" conditionResult="false" option="statsToAddLabel"/>
+            <Target action="show" conditionResult="true" option="includeCorr"/>
+            <Target action="hide" conditionResult="false" option="includeCorr"/>
+            <Target action="show" conditionResult="true" option="includeCov"/>
+            <Target action="hide" conditionResult="false" option="includeCov"/>
+            <Target action="show" conditionResult="true" option="includeSscp"/>
+            <Target action="hide" conditionResult="false" option="includeSscp"/>
+            <Target action="show" conditionResult="true" option="includeCsscp"/>
+            <Target action="hide" conditionResult="false" option="includeCsscp"/>
+        </Dependency>
+        <Dependency condition="($printCombo=='customPrint') &amp;&amp; ($fisherZ=='1')">
+            <Target action="show" conditionResult="true" option="fisherConfType"/>
+            <Target action="hide" conditionResult="false" option="fisherConfType"/>
+            <Target action="show" conditionResult="true" option="fisherConfidence"/>
+            <Target action="hide" conditionResult="false" option="fisherConfidence"/>
+        </Dependency>
+        <Dependency condition="($printCombo=='customPrint' &amp;&amp; ($fisherZ=='1') &amp;&amp; $fisherConfType=='twosidedLimit')">
+            <Target action="show" conditionResult="true" option="nullRho2"/>
+            <Target action="hide" conditionResult="false" option="nullRho2"/>
+        </Dependency>
+        <Dependency condition="($printCombo=='customPrint' &amp;&amp; ($fisherZ=='1') &amp;&amp; $fisherConfType=='upperLimit')">
+            <Target action="show" conditionResult="true" option="nullRhoU"/>
+            <Target action="hide" conditionResult="false" option="nullRhoU"/>
+        </Dependency>
+        <Dependency condition="($printCombo=='customPrint' &amp;&amp; ($fisherZ=='1') &amp;&amp; $fisherConfType=='lowerLimit')">
+            <Target action="show" conditionResult="true" option="nullRhoL"/>
+            <Target action="hide" conditionResult="false" option="nullRhoL"/>
+        </Dependency>
+        <Dependency condition="($printCombo=='customPrint') &amp;&amp; ($fisherZ=='1') &amp;&amp; ($fisherConfidence == 'confidenceSpecify')">
+            <Target action="show" conditionResult="true" option="fisherConfidenceValue"/>
+            <Target action="hide" conditionResult="false" option="fisherConfidenceValue"/>
+        </Dependency>
+    </Dependencies>
+    <Requirements>
+        <Requirement condition="($analysisVariables.size() > 1 || ($analysisVariables.size() == 1 &amp;&amp; $withVariables.size() > 0))">
+            <Message nlsKey="requiredVarsNotSelectedMsg">Select two or more analysis variables or one or more analysis and one correlate with variables.</Message>
+        </Requirement>
+        <Requirement condition="!($printCombo == 'noprint') || $outputDS == 1">
+            <Message nlsKey="outputNotSelectedMsg">Select some tables to display or request an output data set.</Message>
+        </Requirement>
+    </Requirements>
+    <CodeTemplate><![CDATA[
+ods noproctitle;
+ods graphics / imagemap=on;
+
+#if ($fisherZ == 1)
+#if ($fisherConfType == "twosidedLimit") #set($fisherType = "TwoSided")#set($nullRho=$nullRho2) 
+#elseif ($fisherConfType == "lowerLimit") #set($fisherType = "Lower") #set($nullRho=$nullRhoL)
+#else #set($fisherType = "Upper")#set($nullRho=$nullRhoU) 
+#end
+#if ($fisherConfidence == "confidence95") #set( $fisherAlpha = 0.05 )
+#elseif ($fisherConfidence == "confidence99") #set( $fisherAlpha = 0.01 )
+#elseif ($fisherConfidence == "confidence90") #set( $fisherAlpha = 0.10 )
+#else #set( $fisherAlpha = "%sysevalf((100-$fisherConfidenceValue)/100)" )
+#end
+#end
+
+#if (!($plotType=='noPlots'))
+#set($nPlotVars="")
+#if (!($nvarsToPlot == "nvarsToPlot_5"))
+#if ($nvarsToPlot == "nvarsToPlot_1") #set($nPlotVars="1")
+#elseif ($nvarsToPlot == "nvarsToPlot_1") #set($nPlotVars="1")
+#elseif ($nvarsToPlot == "nvarsToPlot_2") #set($nPlotVars="2")
+#elseif ($nvarsToPlot == "nvarsToPlot_3") #set($nPlotVars="3")
+#elseif ($nvarsToPlot == "nvarsToPlot_4") #set($nPlotVars="4")
+#elseif ($nvarsToPlot == "nvarsToPlot_5") #set($nPlotVars="5")
+#elseif ($nvarsToPlot == "nvarsToPlot_6") #set($nPlotVars="6")
+#elseif ($nvarsToPlot == "nvarsToPlot_7") #set($nPlotVars="7")
+#elseif ($nvarsToPlot == "nvarsToPlot_8") #set($nPlotVars="8")
+#elseif ($nvarsToPlot == "nvarsToPlot_9") #set($nPlotVars="9")
+#elseif ($nvarsToPlot == "nvarsToPlot_10") #set($nPlotVars="10")
+#elseif ($nvarsToPlot == "nvarsToPlot_All") #set($nPlotVars="All")
+#end
+#end
+#end
+
+#if ($printCombo == "noprint") #set($print=0) #else #set($print=1)#end
+
+#set($corrOpt=0) #set($covOpt=0) #set($sscpOpt=0) #set($csscpOpt=0)
+#set($printCorr=0) #set($printCov=0) #set($printSscp=0) #set($printCsscp=0)
+#if ($printCombo == "customPrint")
+        #if ($corr == 1)  #set($corrOpt=1) #set($printCorr=1) #end
+        #if ($cov == 1)  #set($covOpt=1) #set($printCov=1) #end
+        #if ($sscp == 1) #set($sscpOpt=1) #set($printSscp=1) #end
+        #if ($csscp == 1) #set($csscpOpt=1) #set($printCsscp=1) #end
+#elseif ($printCombo == "defaultPrint")
+        #set($corrOpt=1) #set($printCorr=1)
+#end
+#if ($outputDS == 1)
+        #if ($includeCorr == 1) #set($corrOpt=1) #end
+        #if ($includeCov == 1) #set($covOpt=1) #end
+        #if ($includeSscp == 1) #set($sscpOpt=1) #end
+        #if ($includeCsscp == 1) #set($csscpOpt=1) #end
+#end
+
+#if ($byVariables.size() > 0)
+proc sort data=$dataset out=Work.SortTempTableSorted;
+   #if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+   #end
+   by #foreach( $item in $byVariables ) $item #end;
+run;
+proc corr data=Work.SortTempTableSorted 
+#else
+proc corr data=$dataset 
+#end
+#if ($printCombo == 'customPrint')
+   #if ($corrOpt == 1) pearson #else nocorr #end
+   #if ($covOpt == 1) cov #end
+   #if ($sscpOpt == 1) sscp #end
+   #if ($csscpOpt == 1) csscp #end
+   #if ($spearmanCorr == 1) spearman #end
+   #if ($kendallTau == 1) kendall #end
+   #if ($hoeffding == 1) hoeffding #end
+   #if ($fisherZ == 1) fisher(rho0=$nullRho alpha=$fisherAlpha type=$fisherType ) #end
+#else
+   #if ($corrOpt == 1) pearson #else nocorr #end
+   #if ($covOpt == 1) cov #end
+   #if ($sscpOpt == 1) sscp #end
+   #if ($csscpOpt == 1) csscp #end
+#end
+#if ($missingValues == "obswiseMissing") nomiss #end
+    #if (!($print== 1)) noprint 
+    #else
+        #if (!($simpleStatistics == 1)) nosimple #end
+        #if (!($pvalues == 1)) noprob #end
+        #if ($rank == 1) rank #end
+    #end
+#if ($outputDS == 1) outp=$outputDSName#if ($print == 1)
+#if (
+    ($printCorr == 1 && !($includeCorr == 1)) || 
+    ($printCov  == 1 && !($includeCov  == 1)) || 
+    ($printSscp == 1 && !($includeSscp == 1)) || 
+    ($printCsscp == 1 && !($includeCsscp == 1)) )
+(where=(_type_ not in (
+#set($comma=0)
+#if ($printCorr  == 1 && !($includeCorr  == 1))#set($comma=1)"CORR"#end
+#if ($printCov   == 1 && !($includeCov   == 1))#if($comma == 1),#end#set($comma=1)"COV"#end
+#if ($printSscp  == 1 && !($includeSscp  == 1))#if($comma == 1),#end#set($comma=1)"SSCP"#end
+#if ($printCsscp == 1 && !($includeCsscp == 1))#if($comma == 1),#end#set($comma=1)"CSSCP"#end
+))
+)
+#else 
+## REMOVED if($replaceOutputDS == 1)(replace=yes)#else(replace=no)#end
+#end    ##if (multiple conditions)
+#else 
+## REMOVED if($replaceOutputDS == 1)(replace=yes)#else(replace=no)#end
+#end    ##if ($print == 1)
+#end    ##if ($outputDS == 1)
+
+#if ($plotType == 'noPlots') plots=none
+#else plots#if(!($maxpointsCombo == 'maxpointsDefault'))
+(
+#if(!($maxpointsCombo == 'maxpointsDefault'))maxpoints=
+#if ($maxpointsCombo == 'maxpoints10000')10000
+#elseif ($maxpointsCombo == 'maxpointsNoLimit')none
+#elseif ($maxpointsCombo == 'maxpointsSpecify')$maxpointsValue
+#end
+#end
+)
+#end
+=
+#if ($plotType == 'matrixPlots') matrix#if ($includeHistogram == '1' || !($nPlotVars == ""))
+(
+#if($includeHistogram == '1')histogram#end
+#if (!($nPlotVars == ""))
+ nvar=$nPlotVars 
+#if ($withVariables.size() > 0)
+ nwith=$nPlotVars 
+#end
+#end
+)
+#end
+#elseif ($plotType == 'scatterPlots') scatter#if (!($includeInset == '1') || $includeEllipse == '1' || !($nPlotVars == ""))
+(
+#if (!($includeInset == '1')) noinset#end
+#if (!($includeEllipse == '1')) ellipse=none
+#else 
+#if ($ellipseType == 'confidenceEllipse') ellipse=confidence
+#else ellipse=prediction
+#end
+#if     ($ellipseConfidence == "confidence95") #set( $ellipseAlpha = 0.05 ) 
+#elseif ($ellipseConfidence == "confidence99") #set( $ellipseAlpha = 0.01 ) 
+#elseif ($ellipseConfidence == "confidence90") #set( $ellipseAlpha = 0.10 ) 
+#elseif ($ellipseConfidence == 'confidenceSpecify')#set( $ellipseAlpha = "%sysevalf((100-$confidenceValue)/100)" )
+#end
+alpha=$ellipseAlpha
+#end
+#if (!($nPlotVars == ""))
+ nvar=$nPlotVars 
+#if ($withVariables.size() > 0)
+ nwith=$nPlotVars 
+#end
+#end
+)
+#else(ellipse=none)
+#end
+#end
+
+#end
+;
+## if print and output, submit ods excludes
+#if ($print == 1 && $outputDS == 1)
+    #if (
+    (!($printCorr == 1) && $includeCorr == 1) || 
+    (!($printCov  == 1) && $includeCov  == 1) || 
+    (!($printSscp == 1) && $includeSscp == 1) || 
+    (!($printCsscp == 1) && $includeCsscp == 1) )
+ods exclude
+    #if (!($printCorr == 1) && $includeCorr == 1) Pearsoncorr #end
+    #if (!($printCov  == 1) && $includeCov  == 1) cov #end
+    #if (!($printSscp == 1) && $includeSscp == 1) sscp #end
+    #if (!($printCsscp == 1) && $includeCsscp == 1) csscp #end
+;
+    #end
+#end
+
+#if ($byVariables.size() == 0 && $dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+#end
+
+#if ( $analysisVariables.size() > 0 )   
+   var #foreach( $item in $analysisVariables ) $item #end; 
+#end
+
+#if ( $withVariables.size() > 0 )   
+   with #foreach( $item in $withVariables ) $item #end; 
+#end
+#if ( $partialVariables.size() > 0 )   
+   partial #foreach( $item in $partialVariables ) $item #end; 
+#end
+#if( $freqVariable.size() > 0 )
+   freq #foreach( $item in $freqVariable ) $item #end;
+#end
+#if( $weightVariable.size() > 0 )
+   weight #foreach( $item in $weightVariable ) $item #end;
+#end
+#if( $byVariables.size() > 0 )
+   by #foreach( $item in $byVariables ) $item #end;
+#end
+run;
+#if ($byVariables.size() > 0)
+proc delete data=Work.SortTempTableSorted;
+run;
+#end
+]]></CodeTemplate>
+    
+
+
+
+
+
+<TemplateValues version="3.8">
+<![CDATA[
+{"scatterPlots":"Individual scatter plots","noPlots":"None","maxpointsCombo":"maxpointsNoLimit","corr":"1","customPrint":"Selected statistics","includeEllipse":"","includeInset":"0","defaultPrint":"Default statistics","fisherGroup":"FISHER'S Z TRANSFORMATION","cov":"0","sasOS":"Linux LIN X64 3.10.0-1062.4.1.el7.x86_64","maxpointsSpecify":"Use custom value","pvalues":"0","dataTab":"DATA","withVariables":"","fisherConfidenceValue":"95","includeCsscp":"","fisherZ":"0","csscp":"0","rank":"0","maxpointsDefault":"Default(5,000)","fisherConfType":"twosidedLimit","plotType":"noPlots","confidenceValue":"95","confidence99":"99%","maxpoints10000":"10,000","confidenceSpecify":"Use custom value","ellipseType":"predictionEllipse","confidence95":"95%","byVariables":"","includeCorr":"1","lowerLimit":"Lower confidence limit","confidence90":"90%","methodsGroup":"METHODS","nvarsToPlot_10":"10","analysisVariables":"json:[{\"value\":\"Item_Weight\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"},{\"value\":\"Item_MRP\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"},{\"value\":\"Outlet_Establishment_Year\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"},{\"value\":\"sqrt_sqrt_Item_Visibility\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"},{\"value\":\"sqrt_sqrt_Item_Outlet_Sales\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"}]","missingValues":"obswiseMissing","maxpointsNoLimit":"No limit","obswiseMissing":"Use nonmissing values for all selected variables","ellipseConfidence":"confidence95","freqVariable":"","noprint":"None","outputDSName":"work.Corr_stats","matrixPlots":"Matrix of scatter plots","statsToAddLabel":"Statistics to include in the output data set:","confidenceEllipse":"Confidence ellipse","nvarsToPlot_2":"2","nonparGroup":"Nonparametric Correlations","nvarsToPlot_1":"1","nvarsToPlot_4":"4","nvarsToPlot_3":"3","nullRhoL":"0","nvarsToPlot_6":"6","nvarsToPlot_5":"5","nvarsToPlot_All":"All","nvarsToPlot_8":"8","nvarsToPlot_7":"7","fisherConfidence":"confidence95","tablesGroup":"STATISTICS","plotGroup":"PLOTS","includeCov":"","rolesGroup":"ROLES","pairwiseMissing":"Use nonmissing values for pairs of variables","simpleStatistics":"0","nvarsToPlot_9":"9","printCombo":"customPrint","predictionEllipse":"Prediction ellipse","kendallTau":"","otherRolesGroup":"ADDITIONAL ROLES","nullRho2":"0","twosidedLimit":"Two-sided confidence limits","hoeffding":"","maxpointsValue":"5000","partialVariables":"","spearmanCorr":"","nvarsToPlot":"nvarsToPlot_5","dataGroup":"DATA","includeHistogram":"","includeSscp":"","sasVersion":"9.46","weightVariable":"","outputGroup":"OUTPUT DATA SET","outputTab":"OUTPUT","upperLimit":"Upper confidence limit","optionsTab":"OPTIONS","sscp":"0","dataset":{"librarytable":"WORK.BIGMARTSALES1"},"nullRhoU":"0","outputDS":""}
+]]>
+</TemplateValues>
+</Task>
