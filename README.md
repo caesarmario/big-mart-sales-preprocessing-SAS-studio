@@ -53,78 +53,86 @@
 👉 The structure of the two data sets that have been given: <br><br>
 <table style="width:100%">
 <thead>
-<tr>
-  <th style="text-align:center; font-weight: bold; font-size:14px">Variable Name</th>
-  <th style="text-align:center; font-weight: bold; font-size:14px">Description</th>
-  <th style="text-align:center; font-weight: bold; font-size:14px">Sample Data</th>
-</tr>
+  <tr>
+    <th style="text-align:center; font-weight: bold; font-size:14px">Column Name</th>
+    <th style="text-align:center; font-weight: bold; font-size:14px">Data Type</th>
+    <th style="text-align:center; font-weight: bold; font-size:14px">Type</th>
+    <th style="text-align:center; font-weight: bold; font-size:14px">Description</th>
+  </tr>
 </thead>
 <tbody>
-<tr>
-<td><b>Loan_ID</b></td>
-<td>Loan reference number <br> (unique ID)</td>
-<td>LP001002; LP001003; ...</td>
-</tr>
-<tr>
-<td><b>Gender</b></td>
-<td>Applicant gender <br> (Male or Female)</td>
-<td>Male; Female</td>
-</tr>
-<tr>
-<td><b>Married</b></td>
-<td>Applicant marital status <br> (Married or not married)</td>
-<td>Married; Not Married</td>
-</tr>
-<tr>
-<td><b>Dependents</b></td>
-<td>Number of family members</td>
-<td>0; 1; 2; 3+</td>
-</tr>
-<tr>
-<td><b>Education</b></td>
-<td>Applicant education/qualification <br> (graduate or not graduate)</td>
-<td>Graduate; Under Graduate</td>
-</tr>
-<tr>
-<td><b>Self_Employed</b></td>
-<td>Applicant employment status <br> (yes for self-employed, no for employed/others)</td>
-<td>Yes; No</td>
-</tr>
-<tr>
-<td><b>ApplicantIncome</b></td>
-<td>Applicant's monthly salary/income</td>
-<td>5849; 4583; ...</td>
-</tr>
-<tr>
-<td><b>CoapplicantIncome</b></td>
-<td>Additional applicant's monthly salary/income</td>
-<td>1508; 2358; ...</td>
-</tr>
-<tr>
-<td><b>LoanAmount</b></td>
-<td>Loan amount</td>
-<td>128; 66; ...</td>
-</tr>
-<tr>
-<td><b>Loan_Amount_Term</b></td>
-<td>The loan's repayment period (in days)</td>
-<td>360; 120; ...</td>
-</tr>
-<tr>
-<td><b>Credit_History</b></td>
-<td>Records of previous credit history <br> (0: bad credit history, 1: good credit history)</td>
-<td>0; 1</td>
-</tr>
-<tr>
-<td><b>Property_Area</b></td>
-<td>The location of property <br> (Rural/Semiurban/Urban)</td>
-<td>Rural; Semiurban; Urban</td>
-</tr>
-<tr>
-<td><b>Loan_Status</b></td>
-<td>Status of loan <br> (Y: accepted, N: not accepted)</td>
-<td>Y; N</td>
-</tr>
+  <tr>
+    <td>Item_Identifier</td>
+    <td>char</td>
+    <td>Nominal</td>
+    <td>Product ID</td>
+  </tr>
+  <tr>
+    <td>Item_Weight</td>
+    <td>num</td>
+    <td>Ratio</td>
+    <td>Weight of product</td>
+  </tr>
+  <tr>
+    <td>Item_Fat_Content</td>
+    <td>char</td>
+    <td>Nominal</td>
+    <td>Content of product (low fat or regular)</td>
+  </tr>
+  <tr>
+    <td>Item_Visibility</td>
+    <td>num</td>
+    <td>Nominal</td>
+    <td>The percentage of all products in the store that are assigned to a specific product in the total display area</td>
+  </tr>
+  <tr>
+    <td>Item_Type</td>
+    <td>char</td>
+    <td>Nominal</td>
+    <td>Category of product</td>
+  </tr>
+  <tr>
+    <td>Item_MRP</td>
+    <td>num</td>
+    <td>Ratio</td>
+    <td>Maximum Retail Price of a product</td>
+  </tr>
+  <tr>
+    <td>Outlet_Identifier</td>
+    <td>char</td>
+    <td>Nominal</td>
+    <td>Store ID</td>
+  </tr>
+  <tr>
+    <td>Outlet_Establishment_Year</td>
+    <td>num</td>
+    <td>Nominal</td>
+    <td>Year the store established</td>
+  </tr>
+  <tr>
+    <td>Outlet_Size</td>
+    <td>char</td>
+    <td>Ordinal</td>
+    <td>Size of the store</td>
+  </tr>
+  <tr>
+    <td>Outlet_Location_Type</td>
+    <td>char</td>
+    <td>Ordinal</td>
+    <td>The type of city where the store is located</td>
+  </tr>
+  <tr>
+    <td>Outlet_Type</td>
+    <td>char</td>
+    <td>Ordinal</td>
+    <td>Type of the store</td>
+  </tr>
+  <tr>
+    <td>Item_Outlet_Sales</td>
+    <td>num</td>
+    <td>Nominal</td>
+    <td>Sales of product</td>
+  </tr>
 </tbody>
 </table>
 
