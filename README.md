@@ -31,15 +31,20 @@
   - [EDA](#-eda)
       - [Pearson Correlation](#-pearson-correlation)
       - [Item Fat Content based on Item Type](#-item-fat-content-based-on-item-type)
-		  - [Outlet Location Type based on Outlet Type](#-outlet-location-type-based-on-outlet-type)
-		  - [Outlet Identifier based on Outlet Size](#-outlet-identifier-based-on-outlet-size)
-		  - [Outlet Identifier based on Outlet Type](#-outlet-identifier-based-on-outlet-type)
+      - [Outlet Location Type based on Outlet Type](#-outlet-location-type-based-on-outlet-type)
+      - [Outlet Identifier based on Outlet Size](#-outlet-identifier-based-on-outlet-size)
+      - [Outlet Identifier based on Outlet Type](#-outlet-identifier-based-on-outlet-type)
   - [Hypothesis](#-hypothesis)
       - [Hypothesis 1](#1%EF%B8%8F⃣-hypothesis-1)
       - [Hypothesis 2](#2%EF%B8%8F⃣-hypothesis-2)
       - [Hypothesis 3](#3%EF%B8%8F⃣-hypothesis-3)
       - [Hypothesis 4](#4%EF%B8%8F⃣-hypothesis-4)
       - [Hypothesis 5](#5%EF%B8%8F⃣-hypothesis-5)
+  - [Feature Engineering](#-feature-engineering)
+      - [Binning](#-binning)
+      - [Label Encoding](#-label-encoding)
+      - [One Hot Encoding](#-one-hot-encoding)
+  - [New Metadata](#-new-metadata)
 <br>
 
 ## 🖋 About Project
@@ -645,7 +650,7 @@
   </tr>
 </tbody>
 </table>
-<br><br>
+<br>
 
 ## 🙌 Support me!
 👉 If you find this project useful, **please ⭐ this repository 😆**!
