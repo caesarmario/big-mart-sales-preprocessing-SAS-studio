@@ -20,21 +20,26 @@
   - [Objectives](#-objectives)
   - [Data Set Description](#-data-set-description)
   - [Initial Data Exploration](#-initial-data-exploration)
-<!--
+      - [Data Sets Summary](#-data-sets-summary)
+      - [Character Column Exploration](#-character-column-exploration)
+      - [Continuous Column Exploration](#-continuous-column-exploration)
+      - [Missing Values Exploration](#-missing-values)
+  - [Data Pre Processing](#-data-pre-processing)
+      - [Handling Dirty Data](#-handling-dirty-data)
+      - [Handling Missing Values](#-handling-missing-values)
+      - [Handling Outliers](#-handling-outliers)
   - [EDA](#-eda)
-      - [Data Sets Structure](#-data-sets-structure)
-      - [Training Data Set](#-training-data-set)
-          - [Univariate](#-univariate---training)
-          - [Bivariate](#-bivariate---training)
-      - [Testing Data Set](#-testing-data-set)
-          - [Univariate](#-univariate---testing)
-          - [Bivariate](#-bivariate---testing)
-  - [Data Imputation](#-data-imputation)
-  - [Logistic Regression Result](#-logistic-regression-result)
-      - [Logistic Regression Summary](#-summary-of-logistic-regression)
-      - [Model Output](#-logistic-regression-model-output)
-      - [Prediction Output](#-prediction-output)
--->
+      - [Pearson Correlation](#-pearson-correlation)
+      - [Item Fat Content based on Item Type](#-item-fat-content-based-on-item-type)
+		  - [Outlet Location Type based on Outlet Type](#-outlet-location-type-based-on-outlet-type)
+		  - [Outlet Identifier based on Outlet Size](#-outlet-identifier-based-on-outlet-size)
+		  - [Outlet Identifier based on Outlet Type](#-outlet-identifier-based-on-outlet-type)
+  - [Hypothesis](#-hypothesis)
+      - [Hypothesis 1](#1%EF%B8%8F⃣-hypothesis-1)
+      - [Hypothesis 2](#2%EF%B8%8F⃣-hypothesis-2)
+      - [Hypothesis 3](#3%EF%B8%8F⃣-hypothesis-3)
+      - [Hypothesis 4](#4%EF%B8%8F⃣-hypothesis-4)
+      - [Hypothesis 5](#5%EF%B8%8F⃣-hypothesis-5)
 <br>
 
 ## 🖋 About Project
@@ -253,35 +258,31 @@
 
 *   Outlet_Size <br>
 ![Handling Missing Values_1](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Handling%20Missing%20Values%20-%201.png)<br> 
-    - It can be seen that the “Small” outlet size belongs to “Grocer Store” and “Supermarket Type1” outlet type. 
-    - However, if the total “Outlet_Size” outlets are added up, the “Medium” size outlet is much bigger than the “Small” size outlets. 
-    - In this case, it was decided to fill in the missing data by following the previous data (last value replacement method) to reduce the biased of analysis.
-<br>
-
+    👉 It can be seen that the “Small” outlet size belongs to “Grocer Store” and “Supermarket Type1” outlet type. <br>
+    👉 However, if the total “Outlet_Size” outlets are added up, the “Medium” size outlet is much bigger than the “Small” size outlets. <br>
+    👉 In this case, it was decided to fill in the missing data by following the previous data (last value replacement method) to reduce the biased of analysis.<br><br>
+    
 ![Handling Missing Values_2](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Handling%20Missing%20Values%20-%202.png)<br> 
-    - Based on "Outlet_Identifier" column, it can be seen that “OUT010”, “OUT017”, and “OUT045” outlets have missing values in the “Outlet_Size” column.
-<br>
+    👉 Based on "Outlet_Identifier" column, it can be seen that “OUT010”, “OUT017”, and “OUT045” outlets have missing values in the “Outlet_Size” column.<br><br>
 
 ![Handling Missing Values_3](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Handling%20Missing%20Values%20-%203.png)<br> 
-    - The table shows the comparison between before and after imputing missing values in the “Outlet_Size” column. 
-    - It can be seen that the missing values have disappeared, and outlet size for “OUT010”, “OUT017”, and “OUT045” already imputed. 
-<br><br>
+    👉 The table shows the comparison between before and after imputing missing values in the “Outlet_Size” column. <br>
+    👉 It can be seen that the missing values have disappeared, and outlet size for “OUT010”, “OUT017”, and “OUT045” already imputed. <br><br>
 
 *   Item_Weight <br>
 ![Item_Weight based on Item_Identifier - 1](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Item_Weight%20based%20on%20Item_Identifier%20-%201.png)<br> 
-    - It can be seen that there are some previous “Item_Weight” values in the dataset based on the “Item_Identifier” column.
-    - In this case, it was decided to fill these missing values by following the previous data (last value replacement method) to reduce the biased of analysis that will be performed in the next section.
-<br>
+    👉 It can be seen that there are some previous “Item_Weight” values in the dataset based on the “Item_Identifier” column. <br>
+    👉 In this case, it was decided to fill these missing values by following the previous data (last value replacement method) to reduce the biased of analysis that will be performed in the next section. <br><br>
 
 ![Item_Weight based on Item_Identifier - 2](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Item_Weight%20based%20on%20Item_Identifier%20-%202.png)<br> 
-    - There are still missing values in the “Item_Weight” column. 
-    - This is because the item ID does not have the value in the previous record
-    - The values will be filled with the “Item_Weight” column's mean value.
-<br>
+    👉 There are still missing values in the “Item_Weight” column. <br>
+    👉 This is because the item ID does not have the value in the previous record. <br>
+    👉 The values will be filled with the “Item_Weight” column's mean value.
+<br><br>
 
 ![Item_Weight based on Item_Identifier - 3](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Item_Weight%20based%20on%20Item_Identifier%20-%203.png)<br> 
-    - The table shows the comparison between before and after imputing missing values in the “Item_Weight” column. 
-    - It can be seen that the missing values have disappeared.
+    👉 The table shows the comparison between before and after imputing missing values in the “Item_Weight” column. <br>
+    👉 It can be seen that the missing values have disappeared.
 <br><br>
 
 ### 🔧 Handling Outliers:
