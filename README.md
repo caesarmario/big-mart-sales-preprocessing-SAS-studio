@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/github/followers/caesarmario?style=social&link=https://www.github.com/caesarmario" alt"GitHub"/>
   </a>
   <a href="https://linktr.ee/caesarmario_">
-    <img src="https://img.shields.io/badge/Follow%20My%20Other%20Works-019875?style=flat&labelColor=019875&link=https:/linktr.ee/caesarmario_" alt="Linktree"/>
+    <img src="https://img.shields.io/badge/My%20Other%20Works-019875?style=flat&labelColor=019875&link=https:/linktr.ee/caesarmario_" alt="Linktree"/>
   </a>
   <!--<a href="https://www.kaggle.com/caesarmario/86-eligibility-prediction-w-various-ml-models/notebook">
     <img src="https://img.shields.io/badge/-Similar%20Works%20on%20Kaggle-teal?style=flat&logo=kaggle&logoColor=deepblue&link=https://www.kaggle.com/caesarmario/86-eligibility-prediction-w-various-ml-models/notebook" alt="Similar Works"/>
@@ -370,12 +370,24 @@
 ## ⚒ Feature Engineering
 ### 🧺 Binning
 *   Item_Category <br>
-![Handling Missing Values_1](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Handling%20Missing%20Values%20-%201.png)<br> 
-    - It can be seen that the “Small” outlet size belongs to “Grocer Store” and “Supermarket Type1” outlet type. 
-    - However, if the total “Outlet_Size” outlets are added up, the “Medium” size outlet is much bigger than the “Small” size outlets. 
-    - In this case, it was decided to fill in the missing data by following the previous data (last value replacement method) to reduce the biased of analysis.
-<br>
+![Item_Category](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Item_Category%20-%20Binning.png)<br> 
+    - It can be seen that for item ID in the "Item_Identifier" column that starts with character "DR" will be classified as "Drink, "FD" will be classified as "Food", and "NC" will be classified as "Non-Consumable".
+<br><br>
 
+*   Age_Outlet <br>
+![Age_Outlet](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Age_Outlet%20-%20Binning.png)<br> 
+    - It can be seen that the age of an outlet is derived from the reduction in the year the outlet was established by 2021.
+<br><br>
+
+*   Outlet_Category <br>
+![Outlet_Category](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Outlet_Category%20-%20Binning.png)<br> 
+    - It can be seen that the age of outlets is classified into three categories: "New Outlet" for outlets aged 1-10 years, "Moderate Outlet" for outlets aged 11-20 years, and "Old Outlet" for those over 20 years old
+<br><br>
+
+
+### 🔖 Label Encoding
+👉 This section will perform label encoding for "Item_Fat_Content" column. <br>
+👉 The label encoding will be described as follows: <br><br>
 <table>
 <thead>
   <tr>
@@ -396,8 +408,39 @@
   </tr>
 </tbody>
 </table>
+<br>
 
+![Item_Fat_Content_Encoding](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Item_Fat%20-%20Label%20Encoding.png)
 
+<br>
+
+### 🔥 One-Hot Encoding
+*   Item_Category <br>
+![Item_Category_Enc](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Item_Category%20-%20One-Hot.png)<br> 
+    - For "Drink" category will be included in group 1, "Food" will be included in group 2, and "Non-Consumable" will be included in group 3.
+<br><br>
+
+*   Outlet_Category <br>
+![Outlet_Category_Enc](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Outlet_Category%20-%20One-Hot.png)<br> 
+    - For "New Outlet" category will be included in group 1, "Moderate Outlet" will be included in group 2, and "Old Outlet" will be included in group 3.
+<br><br>
+
+*   Outlet_Size <br>
+![Outlet_Size_Enc](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Outlet_Size%20-%20One-Hot.png)<br> 
+    - For "Small" category will be included in group 1, "Medium" will be included in group 2, and "High" will be included in group 3.
+<br><br>
+
+*   Outlet_Location_Type <br>
+![Outlet_Location_Type_Enc](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Outlet_Location_Type%20-%20One-Hot.png)<br> 
+    - For "Tier 1" category will be included in group 1, "Tier 2" will be included in group 2, and "Tier 3" will be included in group 3.
+<br><br>
+
+*   Outlet_Type <br>
+![Outlet_Type_Enc](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Outlet_Type%20-%20One-Hot.png)<br> 
+    - For "Grocery Store" category will be included in group 1, "Supermarket Type1" will be included in group 2, "Supermarket Type2" will be included in group 3, and "Supermarket Type3" will be included in group 4.
+<br><br>
+
+## 📜 New Metadata
 <table>
 <thead>
   <tr>
@@ -602,17 +645,12 @@
   </tr>
 </tbody>
 </table>
-
-## 📊 EDA:
-
-
--->
-
-  <!-- ### 🎈 Check out my works on Kaggle [here](https://www.kaggle.com/caesarmario/86-eligibility-prediction-w-various-ml-models/notebook) using similar data set with **86% accuracy**! -->
+<br><br>
 
 ## 🙌 Support me!
 👉 If you find this project useful, **please ⭐ this repository 😆**!
-
+  <!-- ### 🎈 Check out my works on Kaggle [here](https://www.kaggle.com/caesarmario/86-eligibility-prediction-w-various-ml-models/notebook) using similar data set with **86% accuracy**! -->
+  
 ---
 
 👉 _More about myself: <a href="https://linktr.ee/caesarmario_"> here </a>_
