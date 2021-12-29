@@ -223,7 +223,7 @@
 <br><br>
 
 *   Item_MRP <br>
-![Item_MRP](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Initial%20Data%20Exploration/Item_Visibility_1.png)<br>
+![Item_MRP](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Initial%20Data%20Exploration/Item_MRP.png)<br>
     - It can be seen that the distribution is normal (no outliers detected).
 <br><br>
 
@@ -254,13 +254,6 @@
 👉 It can be seen now that the inconsistent values have been replaced into the same values, such as “LF” to “Low Fat”, “reg” to “Regular”, etc. <br><br>
 
 ### ❓ Handling Missing Values:
-*   Outlet_Size <br>
-![Handling Missing Values_1](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Handling%20Missing%20Values%20-%201.png)<br> 
-    - It can be seen that the “Small” outlet size belongs to “Grocer Store” and “Supermarket Type1” outlet type. 
-    - However, if the total “Outlet_Size” outlets are added up, the “Medium” size outlet is much bigger than the “Small” size outlets. 
-    - In this case, it was decided to fill in the missing data by following the previous data (last value replacement method) to reduce the biased of analysis.
-<br><br>
-
 *   Outlet_Size <br>
 ![Handling Missing Values_1](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Handling%20Missing%20Values%20-%201.png)<br> 
     👉 It can be seen that the “Small” outlet size belongs to “Grocer Store” and “Supermarket Type1” outlet type. <br>
