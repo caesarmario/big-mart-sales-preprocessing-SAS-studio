@@ -647,7 +647,7 @@
 
 ## 🙌 Support me!
 👉 If you find this project useful, **please ⭐ this repository 😆**!
-  <!-- ### 🎈 Check out my works on Kaggle [here](https://www.kaggle.com/caesarmario/86-eligibility-prediction-w-various-ml-models/notebook) using similar data set with **86% accuracy**! -->
+### 🎈 Check out my _**data pre-processing and feature engineering using Python**_ on Kaggle [here](https://www.kaggle.com/caesarmario/data-pre-processing-feature-engineering)!
   
 ---
 
