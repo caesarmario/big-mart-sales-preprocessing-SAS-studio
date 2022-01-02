@@ -244,7 +244,8 @@
 ![Missing Values_1](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Missing%20Values%20-%201.png)<br>
 ![Missing Values_2](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Missing%20Values%20-%202.png)<br>
 👉 It can be seen that there are missing values in the “Item_Weight” column (1463 missing values) and the “Outlet_Size” column (2410 missing values).<br>
-👉 These missing values will be pre processed in the next section. <br>
+👉 These missing values will be pre processed in the next section. 
+<br><br>
 [![](https://img.shields.io/badge/back%20to%20top-%E2%86%A9-blue)](#-table-of-contents)
 <br><br>
 
@@ -289,7 +290,8 @@
 👉 From previous section, it can be seen that "Item_Visibility" and "Item_Outlet_Sales" have outliers.<br>
 👉 This section will transform the column values using log and square root transformation, then compare which one is the best transformation for this case. <br><br>
 ![Item_Visibility & Item_Outlet_Sales Transformation](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Data%20Preprocessing/Item_Visibility%20%26%20Item_Outlet_Sales%20Transformation.png)<br><br>
-👉 It can be seen that the square root transformation is better than the log transformation for these two columns since the frequency distribution of the square root transformation is closer to the normal distribution even though there are still outliers in both columns.<br>
+👉 It can be seen that the square root transformation is better than the log transformation for these two columns since the frequency distribution of the square root transformation is closer to the normal distribution even though there are still outliers in both columns.
+<br><br>
 [![](https://img.shields.io/badge/back%20to%20top-%E2%86%A9-blue)](#-table-of-contents)
 <br><br>
 
@@ -322,7 +324,8 @@
 ### 📊 Outlet Identifier based on Outlet Type:
 ![EDA 5](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/EDA/EDA_5.png)<br><br>
 👉 In general, the data for “Supermarket Type1” has symmetrical data (the median is in the middle of the box plot), which means that the data is normally distributed. <br>
-👉 The larger the outlet type, the more items are purchased at the outlet. <br>
+👉 The larger the outlet type, the more items are purchased at the outlet.
+<br><br>
 [![](https://img.shields.io/badge/back%20to%20top-%E2%86%A9-blue)](#-table-of-contents)
 <br><br>
 
@@ -367,7 +370,8 @@
 ![Hypo 5](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Hypothesis/Hypo_5.png)<br>
 ▶ **Conclusion**: H0 accepted <br>
 👉 It can be seen that the number of “Supermarket Type1” reached its peak in 1987 with 932 outlets. <br>
-👉 However, in 2007, the number of “Supermarket Type1” only 926 outlets. <br>
+👉 However, in 2007, the number of “Supermarket Type1” only 926 outlets.
+<br><br>
 [![](https://img.shields.io/badge/back%20to%20top-%E2%86%A9-blue)](#-table-of-contents)
 <br><br>
 
@@ -443,6 +447,8 @@
 *   Outlet_Type <br>
 ![Outlet_Type_Enc](https://github.com/caesarmario/big-mart-sales-preprocessing-SAS-studio/blob/main/Feature%20Engineering/Outlet_Type%20-%20One-Hot.png)<br> 
     - For "Grocery Store" category will be included in group 1, "Supermarket Type1" will be included in group 2, "Supermarket Type2" will be included in group 3, and "Supermarket Type3" will be included in group 4.
+<br><br>
+[![](https://img.shields.io/badge/back%20to%20top-%E2%86%A9-blue)](#-table-of-contents)
 <br><br>
 
 ## 📜 New Metadata
@@ -650,7 +656,9 @@
   </tr>
 </tbody>
 </table>
-<br>
+<br><br>
+[![](https://img.shields.io/badge/back%20to%20top-%E2%86%A9-blue)](#-table-of-contents)
+<br><br>
 
 ## 🙌 Support me!
 👉 If you find this project useful, **please ⭐ this repository 😆**!
